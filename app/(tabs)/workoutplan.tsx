@@ -1,26 +1,26 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import { Link } from 'expo-router';
-import Button from '@/components/buttonDeleteWorkoutplan';
+import Button from '@/components/(buttons)/buttonDeleteWorkoutplan';
 import planList from '@/data/savedWorkout.json';
-import ButtonStartWorkout from '@/components/buttonStartWorkout';
-import ButtonViewInfo from '@/components/buttonWorkoutplanInfo';
+import ButtonStartWorkout from '@/components/(buttons)/buttonStartWorkout';
+import ButtonViewInfo from '@/components/(buttons)/buttonWorkoutplanInfo';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonDeleteWorkoutplan from '@/components/(buttons)/buttonDeleteWorkoutplan';
 
 export default function workoutplan() {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.text}>Workoutplans</Text>
       <Text style={styles.text}>Your Workoutplans</Text>
-      {planList.map((exercise, index) => (
+      {planList.map((trainingsplan, index) => (
         <View key={index} style={styles.exerciseContainer}>
           <View style={styles.container}>
-            <Text style={styles.exerciseName}>{exercise.name}</Text>
+            <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
           </View>
           <View style={styles.container}>
             <View style={styles.buttonContainer}>
               <ButtonStartWorkout label="Start" />
-              <ButtonViewInfo label="View" />
-              <Button label="Delete" />
+              <ButtonViewInfo label="View" workoutplan={trainingsplan.name}/>
+              <ButtonDeleteWorkoutplan label="Delete" workoutplan={trainingsplan.name}/>
             </View>
           </View>
         </View>
@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 30,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
   },
   container: {
     flexDirection: 'column',

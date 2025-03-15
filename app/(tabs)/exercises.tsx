@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
 import ImageViewer from '@/components/ImageViewer';
-import Button from '@/components/buttonDeleteWorkoutplan';
+import Button from '@/components/(buttons)/buttonDeleteWorkoutplan';
 import exerciseList from '@/data/exerciseList.json';
 import { ScrollView } from 'react-native-gesture-handler';
 

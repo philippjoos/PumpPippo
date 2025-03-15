@@ -1,17 +1,103 @@
 [
-    {
-      "name": "testworkout"
-    },
-    {
-        "name": "workout1"
+  {
+    "name": "testworkout",
+    "exercises": [
+      {
+        "name": "Pushups",
+        "description": "Do pushups",
+        "sets": 3,
+        "reps": 10,
+        "weight": 40
       },
       {
-        "name": "wokrout2"
+        "name": "Situps",
+        "description": "Do situps",
+        "sets": 3,
+        "reps": 10
       },
       {
-        "name": "workout3"
-      },
-      {
-        "name": "testworkout2"
+        "name": "Squats",
+        "description": "Do squats",
+        "sets": 3,
+        "reps": 10
       }
+    ]
+  },
+  {
+    "name": "workout1",
+    "exercises": [
+      {
+        "name": "Pushups",
+        "description": "Do pushups",
+        "sets": 3,
+        "reps": 10,
+        "weight": 40
+      },
+      {
+        "name": "Situps",
+        "description": "Do situps",
+        "sets": 3,
+        "reps": 10
+      },
+      {
+        "name": "Squats",
+        "description": "Do squats",
+        "sets": 3,
+        "reps": 10
+      }
+    ]
+  },
+  {
+    "name": "wokrout2",
+    "exercises": [
+      {
+        "name": "Pushups",
+        "description": "Do pushups",
+        "sets": 3,
+        "reps": 10,
+        "weight": 40
+      },
+      {
+        "name": "Situps",
+        "description": "Do situps",
+        "sets": 3,
+        "reps": 10
+      },
+      {
+        "name": "Squats",
+        "description": "Do squats",
+        "sets": 3,
+        "reps": 10
+      }
+    ]
+  },
+  {
+    "name": "workout3",
+    "exercises": [
+      {
+        "name": "Pushups",
+        "description": "Do pushups",
+        "sets": 3,
+        "reps": 10,
+        "weight": 40
+      },
+      {
+        "name": "Squats",
+        "description": "Do squats",
+        "sets": 3,
+        "reps": 10
+      }
+    ]
+  },
+  {
+    "name": "testworkout2",
+    "exercises": [
+      {
+        "name": "Squats",
+        "description": "Do squats",
+        "sets": 3,
+        "reps": 10
+      }
+    ]
+  }
 ]
