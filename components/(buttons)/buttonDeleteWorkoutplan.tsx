@@ -2,27 +2,38 @@ import { StyleSheet, View, Pressable, Text } from 'react-native';
 import planListData from '@/data/savedWorkout.json';
 import { useState } from "react"; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {deleteFile, readFromFile, saveToFile} from '@/utils/fileHandler';
+import PopUpDeleteWorkoutplan from '@/components/(popups)/PopUpDeleteWorkoutplan';
 
 type Props = {
   label: string;
   workoutplan: string;
 };
 
-export default function ButtonDeleteWorkoutplan({ label, workoutplan }: Props) {
-  const [planList, setPlanList] = useState(planListData); 
-  // planListData is the imported json file and setPlanList is the function to update the state
-  const removeWorkoutPlan = (workoutname: string) => {
-    setPlanList((prevPlanList) => prevPlanList.filter((plan) => plan.name !== workoutname));
-  
+export default function ButtonViewInfo({ label, workoutplan }: Props) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const showMessage = () => {
+    const deleteApproveText = "Are you sure you want to delete the following workoutplan?\n" + workoutplan;
+    setModalContent(deleteApproveText);
+    setModalVisible(true);
   };
 
   return (
     <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={() => {removeWorkoutPlan(workoutplan)}}>
+      <Pressable style={styles.button} onPress={() => {showMessage()}}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
+       <PopUpDeleteWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={() => deleteWorkoutPlan(workoutplan)} title={"confirm deleting"} content={modalContent} />
     </View>
   );
+}
+
+const deleteWorkoutPlan = async (workoutplan: string) => {
+  const planList = await readFromFile();
+  const newPlanList = planList.find((item: any) => item.name !== workoutplan);
+  await saveToFile(newPlanList);
 }
 
 const styles = StyleSheet.create({
@@ -31,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
-    backgroundColor: '#ffffff',
   },
   button: {
     borderRadius: 10,

@@ -1,7 +1,7 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useState } from 'react';
 import planList from '@/data/savedWorkout.json';
-import PopUpWorkoutInfo from '../PopUpWorkoutInfo';
+import PopUpWorkoutInfo from '@/components/PopUpWorkoutInfo';
 
 type Props = {
   label: string;

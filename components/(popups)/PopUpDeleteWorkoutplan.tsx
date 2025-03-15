@@ -4,17 +4,19 @@ import { Modal, View, Text, Button, StyleSheet } from "react-native";
 interface PopupModalProps {
   visible: boolean;
   onClose: () => void;
+  onConfirm: () => void;
   title: string;
   content: string;
 }
 
-export default function PopUpRemoveWorkoutplan({ visible, onClose, title, content }: PopupModalProps) {
+export default function PopUpDeleteWorkoutplan({ visible, onClose, onConfirm, title, content }: PopupModalProps) {
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.content}>{content}</Text>
+          <Button title="Confirm" onPress={onConfirm} />
           <Button title="Close" onPress={onClose} />
         </View>
       </View>
