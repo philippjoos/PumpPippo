@@ -17,9 +17,7 @@ export default function ButtonStartWorkout({ label }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
+    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,

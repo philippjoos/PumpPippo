@@ -1,8 +1,9 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
 import ImageViewer from '@/components/ImageViewer';
-import Button from '@/components/button';
+import Button from '@/components/buttonDeleteWorkoutplan';
 import exerciseList from '@/data/exerciseList.json';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const benchpressImage = require('@/assets/images/benchpress.png');
@@ -59,5 +60,9 @@ const styles = StyleSheet.create({
   exerciseInfo: {
     fontSize: 14,
     color: '#555',
+  },  
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
   },
 });

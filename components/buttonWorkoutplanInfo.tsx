@@ -5,7 +5,7 @@ type Props = {
   label: string;
 };
 
-export default function ButtonExercises({ label }: Props) {
+export default function ButtonViewInfo({ label }: Props) {
   return (
     <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
       <Pressable style={styles.button} onPress={() => alert('show exercises of workoutplan.')}>
@@ -17,9 +17,7 @@ export default function ButtonExercises({ label }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
+    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
@@ -36,9 +34,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
   },
-  buttonImage: {
-    width: 200,
-    height: 200,
-    marginRight: 8,
-  }
 });

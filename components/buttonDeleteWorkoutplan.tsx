@@ -17,9 +17,11 @@ export default function Button({ label }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#f8f9fa',
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 3,
+    backgroundColor: '#ffffff',
   },
   button: {
     borderRadius: 10,
@@ -33,9 +35,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
   },
-  buttonImage: {
-    width: 200,
-    height: 200,
-    marginRight: 8,
-  }
 });
