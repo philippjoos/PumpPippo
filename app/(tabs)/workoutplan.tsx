@@ -1,30 +1,25 @@
-import { Text, View, StyleSheet, Alert } from 'react-native';
-import { Link } from 'expo-router';
-import Button from '@/components/(buttons)/buttonDeleteWorkoutplan';
-import planList from '@/data/savedWorkout.json';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import ButtonStartWorkout from '@/components/(buttons)/buttonStartWorkout';
 import ButtonViewInfo from '@/components/(buttons)/buttonWorkoutplanInfo';
-import { ScrollView } from 'react-native-gesture-handler';
 import ButtonDeleteWorkoutplan from '@/components/(buttons)/buttonDeleteWorkoutplan';
+import data from '@/data/savedWorkout.json';
 
-export default function workoutplan() {
+export default function WorkoutPlan() {
+const workoutPlans = data;
+
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.text}>Your Workoutplans</Text>
-      {planList.map((trainingsplan, index) => (
+      <Text style={styles.text}>Your Workout Plans</Text>
+      {workoutPlans.map((trainingsplan, index) => (
         <View key={index} style={styles.exerciseContainer}>
-          <View style={styles.container}>
-            <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
-          </View>
-          <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-              <ButtonStartWorkout label="Start" />
-              <ButtonViewInfo label="View" workoutplan={trainingsplan.name}/>
-              <ButtonDeleteWorkoutplan label="Delete" workoutplan={trainingsplan.name}/>
-            </View>
+          <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
+          <View style={styles.buttonContainer}>
+            <ButtonStartWorkout label='Start'/>
+            <ButtonViewInfo label='View' workoutplan={trainingsplan.name}/>
+            <ButtonDeleteWorkoutplan label='delete' workoutplan={trainingsplan.name}/>
           </View>
         </View>
-      ))}
+    ))}
     </ScrollView>
   );
 }
@@ -54,6 +49,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     alignItems: 'center',
+    padding: 15,
   },
   exerciseName: {
     fontSize: 18,
@@ -62,8 +58,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    flex: 1,
-    padding: 1,
-    backgroundColor: '#ffffff',
-  }
+    justifyContent: 'space-around',
+    width: '100%',
+    paddingVertical: 10,
+  },
+  noWorkoutsText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: 'gray',
+    marginTop: 20,
+  },
 });
