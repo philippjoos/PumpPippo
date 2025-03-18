@@ -1,26 +1,26 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useState } from "react";
-import PopUpDeleteWorkoutplan from '@/components/(popups)/PopUpDeleteWorkoutplan';
+import PopUpDeleteExercise from '@/components/(popups)/(exercise)/PopUpDeleteExercise';
 
 type Props = {
   label: string;
-  workoutplan: string;
-  onDelete: (workoutplan: string) => void;
+  selectedExercise: string;
+  onDelete: (exercise: string) => void;
 };
 
-export default function ButtonDeleteWorkoutplan({ label, workoutplan, onDelete }: Props) {
+export default function ButtonDeleteExercise({ label, selectedExercise, onDelete }: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
   // show Message to confirm deleting
   const showMessage = () => {
-    const deleteApproveText = "Are you sure you want to delete the following workoutplan?\n" + workoutplan;
+    const deleteApproveText = "Are you sure you want to delete the following exercise?\n" + selectedExercise;
     setModalContent(deleteApproveText);
     setModalVisible(true);
   };
 
   const confirmDelete = () => {
-    onDelete(workoutplan);
+    onDelete(selectedExercise);
     setModalVisible(false);
   };
 
@@ -29,7 +29,7 @@ export default function ButtonDeleteWorkoutplan({ label, workoutplan, onDelete }
         <Pressable style={styles.button} onPress={showMessage}>
           <Text style={styles.buttonLabel}>{label}</Text>
         </Pressable>
-        <PopUpDeleteWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm deleting"} content={modalContent} />
+        <PopUpDeleteExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm deleting"} content={modalContent} />
       </View>
     );
 }

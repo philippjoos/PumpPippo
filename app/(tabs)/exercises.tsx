@@ -2,12 +2,13 @@ import { Text, View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import FileHandler from '@/utils/fileHandler';
+import ButtonCreateExercise from '@/components/(buttons)/(exercise)/buttonCreateExercise';
+import ButtonDeleteExercise from '@/components/(buttons)/(exercise)/buttonDeleteExercise';
 
 export type Exercise = {
   name: string;
   muscle_group: string;
   equipment: string;
-  difficulty: string;
 };
 
 export default function exercises() {
@@ -22,35 +23,54 @@ export default function exercises() {
           {
             "name": "Langhantel Bankdrücken",
             "muscle_group": "Brust",
-            "equipment": "Langhantel, Bank",
-            "difficulty": "Mittel"
+            "equipment": "Langhantel, Bank"
           },
         ]);
       }
     })
   }, []);
-  
-console.log(exercises);
+
+  const handleExerciseAdded = (newExercise: Exercise) => {
+    setExercises((prevExercises) => [...prevExercises, newExercise]);
+  };
+
+  const deleteWorkoutPlan = (workoutplanName: string) => {
+    FileHandler.getExercises().then((exercises) => {
+      if(exercises){
+        const newExercises = exercises.filter((exercise) => exercise.name !== workoutplanName);
+        FileHandler.saveData('exercises', newExercises);
+        setExercises(newExercises);
+      }
+    });
+  };
+
+  console.log(exercises);
   return (
-    <ScrollView style={styles.container}>
-      {
-        exercises.map((exercise) => (
-          <View key={exercise.name} style={styles.exerciseContainer}>
-            <Text style={styles.exerciseName}>{exercise.name}</Text>
-            <Text style={styles.exerciseInfo}>Muskelgruppe: {exercise.muscle_group}</Text>
-            <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
-            <Text style={styles.exerciseInfo}>Schwierigkeit: {exercise.difficulty}</Text>
-          </View>
-        ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        {
+          exercises.map((exercise) => (
+            <View key={exercise.name} style={styles.exerciseContainer}>
+              <Text style={styles.exerciseName}>{exercise.name}</Text>
+              <Text style={styles.exerciseInfo}>Muskelgruppe: {exercise.muscle_group}</Text>
+              <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
+              <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteWorkoutPlan} />
+            </View>
+          ))}
+      </ScrollView>
+      <View style={styles.buttonCreate}>
+        <ButtonCreateExercise label="+"  onExerciseCreate={handleExerciseAdded}/>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     flex: 1,
-    padding: 16,
-    backgroundColor: '#f8f9fa',
+    padding: 10,
+    backgroundColor: '#ffffff',
   },
   exerciseContainer: {
     backgroundColor: '#ffffff',
@@ -82,5 +102,16 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+  },
+  buttonCreate: {
+    backgroundColor: 'rgba(85, 201, 247, 0.1)',
+    borderRadius: 50,
+    padding: 10,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginVertical: 10,
+    bottom: '0%',
+    right: 20,
   },
 });

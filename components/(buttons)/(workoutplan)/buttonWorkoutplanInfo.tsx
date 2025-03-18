@@ -1,8 +1,7 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
-import { useEffect, useState } from 'react';
-import PopUpWorkoutInfo from '@/components/PopUpWorkoutInfo';
+import { useState } from 'react';
+import PopUpWorkoutInfo from '@/components/(popups)/(workoutplan)/PopUpWorkoutInfo';
 import FileHandler from '@/utils/fileHandler';
-import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 
 type Props = {
   label: string;
@@ -26,7 +25,7 @@ export default function ButtonViewInfo({ label, workoutplan }: Props) {
 
   const showExercises = () => {
     let exercisesText = "no workoutplan found";
-    FileHandler.getJson('workoutplans').then((plans) => {
+    FileHandler.getWorkoutplans().then((plans) => {
       if (plans) {
         const plan = plans.find((plan) => plan.name === workoutplan);
         plan?.exercises.map((exercise) => {

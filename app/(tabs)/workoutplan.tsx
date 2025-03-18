@@ -1,10 +1,10 @@
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
-import ButtonStartWorkout from '@/components/(buttons)/buttonStartWorkout';
-import ButtonViewInfo from '@/components/(buttons)/buttonWorkoutplanInfo';
-import ButtonDeleteWorkoutplan from '@/components/(buttons)/buttonDeleteWorkoutplan';
+import ButtonStartWorkout from '@/components/(buttons)/(workoutplan)/buttonStartWorkout';
+import ButtonViewInfo from '@/components/(buttons)/(workoutplan)/buttonWorkoutplanInfo';
+import ButtonDeleteWorkoutplan from '@/components/(buttons)/(workoutplan)/buttonDeleteWorkoutplan';
 import FileHandler from '@/utils/fileHandler';
 import React, { useEffect, useState } from 'react';
-import ButtonCreateWorkoutplan from '@/components/(buttons)/buttonCreateWorkoutplan';
+import ButtonCreateWorkoutplan from '@/components/(buttons)/(workoutplan)/buttonCreateWorkoutplan';
 
 export type WorkoutPlan = {
   name: string;
