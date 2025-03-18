@@ -1,31 +1,49 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { Image } from 'expo-image';
-import ImageViewer from '@/components/ImageViewer';
-import Button from '@/components/(buttons)/buttonDeleteWorkoutplan';
-import exerciseList from '@/data/exerciseList.json';
 import { ScrollView } from 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react';
+import FileHandler from '@/utils/fileHandler';
 
+export type Exercise = {
+  name: string;
+  muscle_group: string;
+  equipment: string;
+  difficulty: string;
+};
 
-const benchpressImage = require('@/assets/images/benchpress.png');
-const inclinebenchpressImage = require('@/assets/images/inclinepress.png');
-const bizepscurlsImage = require('@/assets/images/bizepscurls.png');
 export default function exercises() {
-  return (
-<View style={styles.container}>
-      {exerciseList.map((exercise, index) => (
-        <View key={index} style={styles.exerciseContainer}>
-          <Text style={styles.exerciseName}>{exercise.name}</Text>
-          <Text style={styles.exerciseInfo}>Muskelgruppe: {exercise.muscle_group}</Text>
-          <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
-          <Text style={styles.exerciseInfo}>Schwierigkeit: {exercise.difficulty}</Text>
-        </View>
-      ))}
-    </View>
-  );
-}
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
-function addExerciseToWorkoutPlan() {
-  alert('add exercise to workout plan');
+  useEffect(() => {
+    FileHandler.getExercises().then((loadedExercises) => {
+      if (loadedExercises) {
+        setExercises(loadedExercises as Exercise[]);
+      } else {
+        FileHandler.saveData('exercises', [
+          {
+            "name": "Langhantel Bankdrücken",
+            "muscle_group": "Brust",
+            "equipment": "Langhantel, Bank",
+            "difficulty": "Mittel"
+          },
+        ]);
+      }
+    })
+  }, []);
+  
+console.log(exercises);
+  return (
+    <ScrollView style={styles.container}>
+      {
+        exercises.map((exercise) => (
+          <View key={exercise.name} style={styles.exerciseContainer}>
+            <Text style={styles.exerciseName}>{exercise.name}</Text>
+            <Text style={styles.exerciseInfo}>Muskelgruppe: {exercise.muscle_group}</Text>
+            <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
+            <Text style={styles.exerciseInfo}>Schwierigkeit: {exercise.difficulty}</Text>
+          </View>
+        ))}
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -60,7 +78,7 @@ const styles = StyleSheet.create({
   exerciseInfo: {
     fontSize: 14,
     color: '#555',
-  },  
+  },
   scrollView: {
     flex: 1,
     backgroundColor: '#f8f9fa',

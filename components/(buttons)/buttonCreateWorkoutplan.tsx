@@ -1,15 +1,26 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { useState } from "react";
+import PopUpCreateWorkoutplan from '../(popups)/PopUpCreateWorkoutplan';
 
 type Props = {
   label: string;
 };
 
-export default function ButtonStartWorkout({ label }: Props) {
-  return (
+export default function ButtonCreateWorkoutplan({ label }: Props) {
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const handleCreateWorkoutPlan = (name: string) => {
+        if (name.trim() !== '') {
+          
+        }
+      };
+
+    return (
     <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={() => alert('open workoutplan in workout.')}>
+      <Pressable style={styles.button} onPress={() => setModalVisible(true)}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
+      <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
     </View>
   );
 }

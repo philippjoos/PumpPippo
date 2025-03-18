@@ -1,32 +1,45 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
-import { useState } from 'react';
-import planList from '@/data/savedWorkout.json';
+import { useEffect, useState } from 'react';
 import PopUpWorkoutInfo from '@/components/PopUpWorkoutInfo';
+import FileHandler from '@/utils/fileHandler';
+import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 
 type Props = {
   label: string;
   workoutplan: string;
 };
 
+/*export type WorkoutPlan = {
+  id: string
+  name: string;
+  exercises: {
+    name: string;
+    sets: number;
+    reps: number;
+    weight?: number;
+  }[];
+};*/
+
 export default function ButtonViewInfo({ label, workoutplan }: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
   const showExercises = () => {
-    const selectedPlan = planList.find((plan) => plan.name === workoutplan);
-    if (!selectedPlan) return;
-
-    const exercisesText = selectedPlan.exercises
-      .map((ex) => `${ex.name}: ${ex.sets} Sätze x ${ex.reps} Wdh${ex.weight ? ` | Gewicht: ${ex.weight}kg` : ""}`)
-      .join("\n");
-
-    setModalContent(exercisesText);
+    let exercisesText = "no workoutplan found";
+    FileHandler.getJson('workoutplans').then((plans) => {
+      if (plans) {
+        const plan = plans.find((plan) => plan.name === workoutplan);
+        plan?.exercises.map((exercise) => {
+          exercisesText = "Exercise: " + exercise.name + "\nSets: " + exercise.sets + "\nReps: " + exercise.reps + "\nWeight: " + exercise.weight;})
+      }
+      setModalContent(exercisesText);
+    });
     setModalVisible(true);
   };
 
   return (
     <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={() => {showExercises()}}>
+      <Pressable style={styles.button} onPress={showExercises}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
        <PopUpWorkoutInfo visible={modalVisible} onClose={() => setModalVisible(false)} title={workoutplan} content={modalContent} />

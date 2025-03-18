@@ -2,25 +2,120 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import ButtonStartWorkout from '@/components/(buttons)/buttonStartWorkout';
 import ButtonViewInfo from '@/components/(buttons)/buttonWorkoutplanInfo';
 import ButtonDeleteWorkoutplan from '@/components/(buttons)/buttonDeleteWorkoutplan';
-import data from '@/data/savedWorkout.json';
+import FileHandler from '@/utils/fileHandler';
+import React, { useEffect, useState } from 'react';
+import ButtonCreateWorkoutplan from '@/components/(buttons)/buttonCreateWorkoutplan';
+
+export type WorkoutPlan = {
+  name: string;
+  exercises: {
+    id?: number
+    name: string;
+    sets: number;
+    reps: number;
+    weight?: number;
+    description?: string;
+  }[];
+};
 
 export default function WorkoutPlan() {
-const workoutPlans = data;
+  const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
+
+  useEffect(() => {
+    FileHandler.getWorkoutplans().then((plans) => {
+      if (plans) {
+        setWorkoutPlans(plans as WorkoutPlan[]);
+      } else {
+        FileHandler.saveData('workoutplans',
+          [
+            {
+              name: "Test",
+              exercises: [
+                {
+                  "id": 1,
+                  "name": "Pushups",
+                  "description": "Do pushups",
+                  "sets": 3,
+                  "reps": 10,
+                  "weight": 40
+                },
+                {
+                  "id": 2,
+                  "name": "Situps",
+                  "description": "Do situps",
+                  "sets": 3,
+                  "reps": 10
+                },
+                {
+                  "id": 3,
+                  "name": "Squats",
+                  "description": "Do squats",
+                  "sets": 3,
+                  "reps": 10
+                }
+              ]
+            },
+            {
+              name: "Test2",
+              exercises: [
+                {
+                  "name": "Pushups",
+                  "description": "Do pushups",
+                  "sets": 3,
+                  "reps": 10,
+                  "weight": 40
+                },
+                {
+                  "name": "Situps",
+                  "description": "Do situps",
+                  "sets": 3,
+                  "reps": 10
+                },
+                {
+                  "name": "Squats",
+                  "description": "Do squats",
+                  "sets": 3,
+                  "reps": 10
+                }
+              ]
+            }
+          ]
+        )
+      }
+    });
+  }, []);
+
+  const deleteWorkoutPlan = (workoutplanName: string) => {
+    FileHandler.getWorkoutplans().then((plans) => {
+      if(plans){
+        const newPlans = plans.filter((plan) => plan.name !== workoutplanName);
+        FileHandler.saveData('workoutplans', newPlans);
+        setWorkoutPlans(newPlans);
+      }
+    });
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.text}>Your Workout Plans</Text>
-      {workoutPlans.map((trainingsplan, index) => (
-        <View key={index} style={styles.exerciseContainer}>
-          <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
-          <View style={styles.buttonContainer}>
-            <ButtonStartWorkout label='Start'/>
-            <ButtonViewInfo label='View' workoutplan={trainingsplan.name}/>
-            <ButtonDeleteWorkoutplan label='delete' workoutplan={trainingsplan.name}/>
-          </View>
-        </View>
-    ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.text}>Your Workout Plans</Text>
+        {
+          workoutPlans.map((trainingsplan) => (
+            <View key={trainingsplan.name} style={styles.exerciseContainer}>
+              <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
+              <View style={styles.buttonContainer}>
+                <ButtonStartWorkout label="Start" />
+                <ButtonViewInfo label="View" workoutplan={trainingsplan.name} />
+                <ButtonDeleteWorkoutplan label="Delete" workoutplan={trainingsplan.name} onDelete={deleteWorkoutPlan} />
+              </View>
+            </View>
+          ))
+        }
+      </ScrollView>
+      <View style={styles.buttonCreate}>
+        <ButtonCreateWorkoutplan label='+' />
+      </View>
+    </View>
   );
 }
 
@@ -67,5 +162,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'gray',
     marginTop: 20,
+  },
+  buttonCreate: {
+    backgroundColor: 'rgba(85, 201, 247, 0.1)',
+    borderRadius: 50,
+    padding: 10,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginVertical: 10,
+    bottom: '0%',
+    right: 20,
   },
 });
