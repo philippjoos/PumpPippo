@@ -6,10 +6,11 @@ interface PopupModalProps {
   visible: boolean;
   onClose: () => void;
   onConfirm: (name: string) => void;
+  onAddExercise: () => void;
   title: string;
 }
 
-export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, title }: PopupModalProps) {
+export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, onAddExercise, title }: PopupModalProps) {
   const [workoutplanName, setWorkoutplanName] = useState("");
   return (
     <Modal visible={visible} transparent animationType="slide">
@@ -19,10 +20,11 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
           <Text style={styles.content}>{}</Text>
           <View style={styles.lineContainer}>
             <Text style={styles.content}>Workoutname: </Text>
-            <TextInput style={styles.textbox} placeholder="workoutplan name" value={workoutplanName} onChangeText={setWorkoutplanName} />
+            <TextInput style={styles.textbox} placeholder="" value={workoutplanName} onChangeText={setWorkoutplanName} />
           </View>
           <View style={styles.buttonRow}>
             <Button title="Create" onPress={() => onConfirm(workoutplanName)} />
+            <Button title="Add Exercise" onPress={() => onAddExercise} />
             <Button title="Close" onPress={onClose} />
           </View>
         </View>

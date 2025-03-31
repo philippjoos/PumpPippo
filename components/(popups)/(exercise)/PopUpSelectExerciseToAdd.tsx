@@ -8,17 +8,12 @@ interface PopupModalProps {
   content: string;
 }
 
-export default function PopUpDeleteExercise({ visible, onClose, onConfirm, title, content }: PopupModalProps) {
+export default function PopUpSelectExerciseToAdd({ visible, onClose, onConfirm, title, content }: PopupModalProps) {
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.content}>{content}</Text>
-          <View style={styles.buttonRow}>
-            <Button title="Confirm" onPress={onConfirm} />
-            <Button title="Close" onPress={onClose} />
-          </View>
+          <Text style={styles.title}>dinifettimuetter</Text>
         </View>
       </View>
     </Modal>
