@@ -24,7 +24,7 @@ const containerStyles = StyleSheet.create({
       buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '100%',
+        width: '25%',
         paddingVertical: 10,
       },
         // Styles from buttonCreateWorkoutplan.tsx
