@@ -5,6 +5,12 @@ import PopUpSelectExerciseToAdd from "../(exercise)/PopUpSelectExerciseToAdd";
 import { Exercise } from "@/app/(tabs)/exercises";
 import { WorkoutPlan } from "@/app/(tabs)/workoutplan";
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 interface PopupModalProps {
   visible: boolean;
   onClose: () => void;
@@ -52,22 +58,22 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
 
   return (
     <Modal visible={visible} transparent animationType="slide">
-      <View style={styles.modalBackground}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.content}>{ }</Text>
-          <View style={styles.lineContainer}>
-            <Text style={styles.content}>Workoutname: </Text>
-            <TextInput style={styles.textbox} placeholder="" onChangeText={setWorkoutplanName} />
+      <View style={defaultStyles.modalBackground}>
+        <View style={containerStyles.modalContainer}>
+          <Text style={textStyles.title}>{title}</Text>
+          <Text style={textStyles.content}>{ }</Text>
+          <View style={containerStyles.lineContainer}>
+            <Text style={textStyles.content}>Workoutname: </Text>
+            <TextInput style={defaultStyles.textbox} placeholder="" onChangeText={setWorkoutplanName} />
           </View>
           <ScrollView>
             {selectedExercises.map((exercise, index) => (
               <View key={index}>
-                <Text style={styles.content}>{exercise.name}</Text>
-                <View style={styles.lineContainer}>
-                  <Text style={styles.content}>Anzahl Sets: </Text>
+                <Text style={textStyles.content}>{exercise.name}</Text>
+                <View style={containerStyles.lineContainer}>
+                  <Text style={textStyles.content}>Anzahl Sets: </Text>
                   <TextInput
-                    style={styles.textbox}
+                    style={defaultStyles.textbox}
                     placeholder="Sets"
                     onChangeText={(text) => {
                       const updatedExercises = [...selectedExercises];
@@ -76,10 +82,10 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
                     }}
                   />
                 </View>
-                <View style={styles.lineContainer}>
-                  <Text style={styles.content}>Anzahl Reps: </Text>
+                <View style={containerStyles.lineContainer}>
+                  <Text style={textStyles.content}>Anzahl Reps: </Text>
                   <TextInput
-                    style={styles.textbox}
+                    style={defaultStyles.textbox}
                     placeholder="Reps"
                     onChangeText={(text) => {
                       const updatedExercises = [...selectedExercises];
@@ -88,10 +94,10 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
                     }}
                   />
                 </View>
-                <View style={styles.lineContainer}>
-                  <Text style={styles.content}>Gewicht: </Text>
+                <View style={containerStyles.lineContainer}>
+                  <Text style={textStyles.content}>Gewicht: </Text>
                   <TextInput
-                    style={styles.textbox}
+                    style={defaultStyles.textbox}
                     placeholder="Weight"
                     onChangeText={(text) => {
                       const updatedExercises = [...selectedExercises];
@@ -103,7 +109,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
               </View>
             ))}
           </ScrollView>
-          <View style={styles.buttonRow}>
+          <View style={defaultStyles.buttonRow}>
             <Button title="Create" onPress={handleCreate} />
             <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} />
             <Button title="Close" onPress={onClosing} />
@@ -122,41 +128,3 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
 
   );
 }
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-  },
-  modalContainer: {
-    marginBottom: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  content: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-  textbox: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  lineContainer: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-});

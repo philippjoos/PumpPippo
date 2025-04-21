@@ -7,6 +7,12 @@ import React, { useEffect, useState } from 'react';
 import ButtonCreateWorkoutplan from '@/components/(buttons)/(workoutplan)/buttonCreateWorkoutplan';
 import { Exercise } from '@/app/(tabs)/exercises';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 export type WorkoutPlan = {
   name: string;
   exercises: Exercise[];
@@ -42,14 +48,14 @@ export type WorkoutPlan = {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Your Workout Plans</Text>
-      <ScrollView style={styles.container}>
+    <View style={containerStyles.container}>
+      <Text style={textStyles.text}>Your Workout Plans</Text>
+      <ScrollView style={containerStyles.container}>
         {
           workoutPlans.map((trainingsplan) => (
-            <View key={trainingsplan.name} style={styles.exerciseContainer}>
-              <Text style={styles.exerciseName}>{trainingsplan.name}</Text>
-              <View style={styles.buttonContainer}>
+            <View key={trainingsplan.name} style={containerStyles.exerciseContainer}>
+              <Text style={textStyles.exerciseName}>{trainingsplan.name}</Text>
+              <View style={containerStyles.buttonContainer}>
                 <ButtonStartWorkout label="Start" />
                 <ButtonViewInfo label="View" workoutplan={trainingsplan.name} />
                 <ButtonDeleteWorkoutplan label="Delete" workoutplan={trainingsplan.name} onDelete={deleteWorkoutPlan} />
@@ -58,66 +64,9 @@ export type WorkoutPlan = {
           ))
         }
       </ScrollView>
-      <View style={styles.buttonCreate}>
+      <View style={buttonStyles.buttonCreate}>
         <ButtonCreateWorkoutplan label='+' onWorkoutPlanAdded={createWorkoutPlan} />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    color: '#000000',
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#ffffff',
-  },
-  exerciseContainer: {
-    flexDirection: 'column',
-    backgroundColor: '#ffffff',
-    marginBottom: 10,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-    alignItems: 'center',
-    padding: 15,
-  },
-  exerciseName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    paddingVertical: 10,
-  },
-  noWorkoutsText: {
-    textAlign: 'center',
-    fontSize: 18,
-    color: 'gray',
-    marginTop: 20,
-  },
-  buttonCreate: {
-    backgroundColor: 'rgba(85, 201, 247, 0.1)',
-    borderRadius: 50,
-    padding: 10,
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginVertical: 10,
-    bottom: '0%',
-    right: 20,
-  },
-});

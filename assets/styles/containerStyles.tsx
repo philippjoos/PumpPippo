@@ -56,3 +56,5 @@ const containerStyles = StyleSheet.create({
         backgroundColor: "#f9f9f9",
       },
     });
+
+    export default containerStyles;

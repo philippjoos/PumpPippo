@@ -2,6 +2,12 @@ import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useState } from "react";
 import PopUpDeleteExercise from '@/components/(popups)/(exercise)/PopUpDeleteExercise';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 type Props = {
   label: string;
   selectedExercise: string;
@@ -25,33 +31,11 @@ export default function ButtonDeleteExercise({ label, selectedExercise, onDelete
   };
 
     return (
-      <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-        <Pressable style={styles.button} onPress={showMessage}>
-          <Text style={styles.buttonLabel}>{label}</Text>
+      <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+        <Pressable style={buttonStyles.button} onPress={showMessage}>
+          <Text style={textStyles.buttonLabel}>{label}</Text>
         </Pressable>
         <PopUpDeleteExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm deleting"} content={modalContent} />
       </View>
     );
 }
-
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonLabel: {
-    fontSize: 18,
-    fontStyle: 'italic',
-  },
-});

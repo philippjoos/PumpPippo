@@ -3,21 +3,16 @@ import { useState } from 'react';
 import PopUpWorkoutInfo from '@/components/(popups)/(workoutplan)/PopUpWorkoutInfo';
 import FileHandler from '@/utils/fileHandler';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 type Props = {
   label: string;
   workoutplan: string;
 };
-
-/*export type WorkoutPlan = {
-  id: string
-  name: string;
-  exercises: {
-    name: string;
-    sets: number;
-    reps: number;
-    weight?: number;
-  }[];
-};*/
 
 export default function ButtonViewInfo({ label, workoutplan }: Props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -37,32 +32,11 @@ export default function ButtonViewInfo({ label, workoutplan }: Props) {
   };
 
   return (
-    <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={showExercises}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+      <Pressable style={buttonStyles.button} onPress={showExercises}>
+        <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
        <PopUpWorkoutInfo visible={modalVisible} onClose={() => setModalVisible(false)} title={workoutplan} content={modalContent} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonLabel: {
-    fontSize: 18,
-    fontStyle: 'italic',
-  },
-});

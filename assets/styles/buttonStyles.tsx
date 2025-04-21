@@ -20,13 +20,6 @@ const buttonStyles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
       },
-      buttonRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "100%",
-        paddingHorizontal: 20,
-        marginTop: 20,
-      },
 });
 
 export default buttonStyles;

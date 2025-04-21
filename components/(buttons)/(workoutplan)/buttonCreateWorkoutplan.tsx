@@ -4,6 +4,12 @@ import PopUpCreateWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpCre
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 import FileHandler from '@/utils/fileHandler';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 type Props = {
   label: string;
   onWorkoutPlanAdded: (workoutPlan: WorkoutPlan) => void; 
@@ -32,37 +38,11 @@ export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: P
   };
 
     return (
-    <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={() => setModalVisible(true)}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+      <Pressable style={buttonStyles.button} onPress={() => setModalVisible(true)}>
+        <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
       <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonLabel: {
-    fontSize: 18,
-    fontStyle: 'italic',
-  },
-  buttonImage: {
-    width: 200,
-    height: 200,
-    marginRight: 8,
-  }
-});

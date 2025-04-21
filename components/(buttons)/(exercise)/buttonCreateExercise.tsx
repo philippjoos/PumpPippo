@@ -4,6 +4,11 @@ import PopUpCreateExercise from '../../(popups)/(exercise)/PopUpCreateExercise';
 import { Exercise } from '@/app/(tabs)/exercises';
 import FileHandler from '@/utils/fileHandler';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+
 type Props = {
   label: string;
   onExerciseCreate: (exercise: Exercise) => void;
@@ -30,37 +35,11 @@ export default function ButtonCreateExercise({ label, onExerciseCreate }: Props)
       };
 
     return (
-    <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={styles.button} onPress={() => setModalVisible(true)}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+      <Pressable style={buttonStyles.button} onPress={() => setModalVisible(true)}>
+        <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
       <PopUpCreateExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateExercise} title={"Create Exercise"} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonLabel: {
-    fontSize: 18,
-    fontStyle: 'italic',
-  },
-  buttonImage: {
-    width: 200,
-    height: 200,
-    marginRight: 8,
-  }
-});

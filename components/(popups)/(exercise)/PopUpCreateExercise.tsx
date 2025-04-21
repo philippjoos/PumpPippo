@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import { Modal, View, Text, Button, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 interface PopupModalProps {
     visible: boolean;
     onClose: () => void;
@@ -40,23 +46,23 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
 
     return (
         <Modal visible={visible} transparent animationType="slide">
-            <View style={styles.modalBackground}>
-                <View style={styles.modalContainer}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.content}>{ }</Text>
-                    <View style={styles.lineContainer}>
-                        <Text style={styles.content}>Exercise: </Text>
-                        <TextInput style={styles.textbox} placeholder="" value={exerciseName} onChangeText={setExerciseName} />
+            <View style={defaultStyles.modalBackground}>
+                <View style={containerStyles.modalContainer}>
+                    <Text style={textStyles.title}>{title}</Text>
+                    <Text style={textStyles.content}>{ }</Text>
+                    <View style={containerStyles.lineContainer}>
+                        <Text style={textStyles.content}>Exercise: </Text>
+                        <TextInput style={defaultStyles.textbox} placeholder="" value={exerciseName} onChangeText={setExerciseName} />
                     </View>
-                    <View style={styles.lineContainer}>
-                        <Text style={styles.content}>Muscle Group: </Text>
-                        <TextInput style={styles.textbox} placeholder="" value={muscle_group} onChangeText={setMuscleGroup} />
+                    <View style={containerStyles.lineContainer}>
+                        <Text style={textStyles.content}>Muscle Group: </Text>
+                        <TextInput style={defaultStyles.textbox} placeholder="" value={muscle_group} onChangeText={setMuscleGroup} />
                     </View>
-                    <View style={styles.lineContainer}>
-                        <Text style={styles.content}>Equipment: </Text>
-                        <TextInput style={styles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
+                    <View style={containerStyles.lineContainer}>
+                        <Text style={textStyles.content}>Equipment: </Text>
+                        <TextInput style={defaultStyles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
                     </View>
-                    <View style={styles.buttonRow}>
+                    <View style={defaultStyles.buttonRow}>
                         <Button title="Create" onPress={addExercise} />
                         <Button title="Close" onPress={onClosing} />
                     </View>
@@ -65,44 +71,3 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
         </Modal >
     );
 }
-
-const styles = StyleSheet.create({
-    modalBackground: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#ffffff",
-    },
-    modalContainer: {
-        marginBottom: 10,
-        borderRadius: 10,
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: "bold",
-        marginBottom: 10,
-    },
-    content: {
-        fontSize: 16,
-        textAlign: "center",
-        marginBottom: 20,
-    },
-    buttonRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '100%',
-        paddingHorizontal: 20,
-    },
-    textbox: {
-        fontSize: 16,
-        marginBottom: 20,
-        borderColor: 'gray',
-        shadowColor: '#000',
-    },
-    lineContainer: {
-        flexDirection: 'row',
-        marginBottom: 10,
-
-    },
-});

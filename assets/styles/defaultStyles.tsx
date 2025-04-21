@@ -24,6 +24,13 @@ const defaultStyles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
   },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
 
 });
 

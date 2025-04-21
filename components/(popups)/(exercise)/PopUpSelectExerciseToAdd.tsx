@@ -4,6 +4,12 @@ import { Exercise } from "@/app/(tabs)/exercises";
 import { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+import defaultStyles from '@/assets/styles/defaultStyles';
+
 // Define the PopupModalProps interface
 interface PopupModalProps {
   visible: boolean;
@@ -29,9 +35,9 @@ export default function PopUpSelectExerciseToAdd({ visible, onClose, onExerciseS
 
   return (
     <Modal visible={visible} transparent animationType="slide">
-      <View style={styles.modalBackground}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.title}>Select an Exercise to add to your workoutplan:</Text>
+      <View style={defaultStyles.modalBackground}>
+        <View style={containerStyles.modalContainer}>
+          <Text style={textStyles.title}>Select an Exercise to add to your workoutplan:</Text>
           <ScrollView>
             {exercises.map((exercise: Exercise) => (
               <Button key={exercise.name} title={exercise.name} onPress={() => handleExerciseSelected(exercise)} />
@@ -42,33 +48,3 @@ export default function PopUpSelectExerciseToAdd({ visible, onClose, onExerciseS
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-  },
-  modalContainer: {
-    marginBottom: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  content: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-});

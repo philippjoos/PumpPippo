@@ -5,6 +5,11 @@ import FileHandler from '@/utils/fileHandler';
 import ButtonCreateExercise from '@/components/(buttons)/(exercise)/buttonCreateExercise';
 import ButtonDeleteExercise from '@/components/(buttons)/(exercise)/buttonDeleteExercise';
 
+// styles imports
+import buttonStyles from '@/assets/styles/buttonStyles';
+import containerStyles from '@/assets/styles/containerStyles';
+import textStyles from '@/assets/styles/textStyles';
+
 export type Exercise = {
   name: string;
   muscle_group: string;
@@ -48,72 +53,21 @@ export default function exercises() {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container}>
+    <View style={containerStyles.container}>
+      <ScrollView style={containerStyles.container}>
         {
           exercises.map((exercise) => (
-            <View key={exercise.name} style={styles.exerciseContainer}>
-              <Text style={styles.exerciseName}>{exercise.name}</Text>
-              <Text style={styles.exerciseInfo}>Muscle Group: {exercise.muscle_group}</Text>
-              <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
+            <View key={exercise.name} style={containerStyles.exerciseContainer}>
+              <Text style={textStyles.exerciseName}>{exercise.name}</Text>
+              <Text style={textStyles.content}>Muscle Group: {exercise.muscle_group}</Text>
+              <Text style={textStyles.content}>Equipment: {exercise.equipment}</Text>
               <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteWorkoutPlan} />
             </View>
           ))}
       </ScrollView>
-      <View style={styles.buttonCreate}>
+      <View style={buttonStyles.buttonCreate}>
         <ButtonCreateExercise label="+"  onExerciseCreate={handleExerciseAdded}/>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#ffffff',
-  },
-  exerciseContainer: {
-    backgroundColor: '#ffffff',
-    padding: 16,
-    marginBottom: 10,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    alignItems: 'center',
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginBottom: 10,
-    borderRadius: 10,
-  },
-  exerciseName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  exerciseInfo: {
-    fontSize: 14,
-    color: '#555',
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  buttonCreate: {
-    backgroundColor: 'rgba(85, 201, 247, 0.1)',
-    borderRadius: 50,
-    padding: 10,
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginVertical: 10,
-    bottom: '0%',
-    right: 20,
-  },
-});
