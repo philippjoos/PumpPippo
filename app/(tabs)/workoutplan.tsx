@@ -63,7 +63,7 @@ export type WorkoutPlan = {
           ))
         }
       </ScrollView>
-      <View style={buttonStyles.buttonCreate}>
+      <View style={containerStyles.buttonCreateContainer}>
         <ButtonCreateWorkoutplan label='+' onWorkoutPlanAdded={createWorkoutPlan} />
       </View>
     </View>

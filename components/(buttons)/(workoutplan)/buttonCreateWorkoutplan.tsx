@@ -38,8 +38,8 @@ export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: P
   };
 
     return (
-    <View style={[containerStyles.buttonContainer]}>
-      <Pressable style={buttonStyles.button} onPress={() => setModalVisible(true)}>
+    <View>
+      <Pressable style={buttonStyles.buttonCreate} onPress={() => setModalVisible(true)}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
       <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />

@@ -13,7 +13,7 @@ type Props = {
 export default function ButtonStartWorkout({ label }: Props) {
   return (
     <View style={[containerStyles.buttonContainer]}>
-      <Pressable style={buttonStyles.button} onPress={() => alert('open workoutplan in workout.')}>
+      <Pressable style={buttonStyles.buttonWorkoutPlans} onPress={() => alert('open workoutplan in workout.')}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>

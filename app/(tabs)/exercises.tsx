@@ -65,7 +65,7 @@ export default function exercises() {
             </View>
           ))}
       </ScrollView>
-      <View style={buttonStyles.buttonCreate}>
+      <View style={containerStyles.buttonCreateContainer}>
         <ButtonCreateExercise label="+"  onExerciseCreate={handleExerciseAdded}/>
       </View>
     </View>

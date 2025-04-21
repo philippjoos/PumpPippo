@@ -33,7 +33,7 @@ export default function ButtonViewInfo({ label, workoutplan }: Props) {
 
   return (
     <View style={[containerStyles.buttonContainer]}>
-      <Pressable style={buttonStyles.button} onPress={showExercises}>
+      <Pressable style={buttonStyles.buttonWorkoutPlans} onPress={showExercises}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
        <PopUpWorkoutInfo visible={modalVisible} onClose={() => setModalVisible(false)} title={workoutplan} content={modalContent} />

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { useState } from "react";
 import PopUpDeleteExercise from '@/components/(popups)/(exercise)/PopUpDeleteExercise';
 
@@ -6,7 +6,6 @@ import PopUpDeleteExercise from '@/components/(popups)/(exercise)/PopUpDeleteExe
 import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import defaultStyles from '@/assets/styles/defaultStyles';
 
 type Props = {
   label: string;
@@ -31,8 +30,8 @@ export default function ButtonDeleteExercise({ label, selectedExercise, onDelete
   };
 
     return (
-      <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-        <Pressable style={buttonStyles.button} onPress={showMessage}>
+      <View style={[containerStyles.buttonContainer]}>
+        <Pressable style={buttonStyles.buttonExercises} onPress={showMessage}>
           <Text style={textStyles.buttonLabel}>{label}</Text>
         </Pressable>
         <PopUpDeleteExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm deleting"} content={modalContent} />

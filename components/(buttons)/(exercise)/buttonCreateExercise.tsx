@@ -35,8 +35,8 @@ export default function ButtonCreateExercise({ label, onExerciseCreate }: Props)
       };
 
     return (
-    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
-      <Pressable style={buttonStyles.button} onPress={() => setModalVisible(true)}>
+    <View>
+      <Pressable style={buttonStyles.buttonCreate} onPress={() => setModalVisible(true)}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
       <PopUpCreateExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateExercise} title={"Create Exercise"} />
