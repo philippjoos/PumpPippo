@@ -1,7 +1,6 @@
 import { Modal, View, Text, Button, StyleSheet } from "react-native";
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
@@ -21,8 +20,10 @@ export default function PopUpDeleteWorkoutplan({ visible, onClose, onConfirm, ti
         <View style={containerStyles.modalContainer}>
           <Text style={textStyles.title}>{title}</Text>
           <Text style={textStyles.content}>{content}</Text>
-          <Button title="Confirm" onPress={onConfirm} />
-          <Button title="Close" onPress={onClose} />
+          <View style={containerStyles.buttonContainer}>
+            <Button title="Confirm" onPress={onConfirm} color={'#6D28D9'}/>
+            <Button title="Close" onPress={onClose} color={'#6D28D9'}/>
+          </View>
         </View>
       </View>
     </Modal>

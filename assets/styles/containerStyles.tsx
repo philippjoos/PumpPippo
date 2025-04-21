@@ -57,7 +57,7 @@ const containerStyles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     padding: 20,
-    width: "90%",
+    width: "100%",
     maxHeight: "90%",
   },
   lineContainer: {

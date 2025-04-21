@@ -4,7 +4,6 @@ import { Modal, View, Text, Button, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
@@ -62,9 +61,9 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                         <Text style={textStyles.content}>Equipment: </Text>
                         <TextInput style={defaultStyles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
                     </View>
-                    <View style={defaultStyles.buttonRow}>
-                        <Button title="Create" onPress={addExercise} />
-                        <Button title="Close" onPress={onClosing} />
+                    <View style={containerStyles.buttonContainer}>
+                        <Button title="Create" onPress={addExercise} color={'#6D28D9'}/>
+                        <Button title="Close" onPress={onClosing} color={'#6D28D9'}/>
                     </View>
                 </View>
             </View>
