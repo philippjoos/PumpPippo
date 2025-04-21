@@ -1,26 +1,42 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useState } from "react";
-import PopUpSelectExerciseToAdd from "@/components/(popups)/(exercise)/PopUpSelectExerciseToAdd";
+import PopUpCreateWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpCreateWorkoutplan';
+import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
+import FileHandler from '@/utils/fileHandler';
 
 type Props = {
   label: string;
+  onWorkoutPlanAdded: (workoutPlan: WorkoutPlan) => void; 
 };
 
-export default function ButtonCreateWorkoutplan({ label }: Props) {
-    const [modalVisible, setModalVisible] = useState(false);
+export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: Props) {
+  const [modalVisible, setModalVisible] = useState(false);
 
-    const handleCreateWorkoutPlan = (name: string) => {
-        if (name.trim() !== '') {
-          
-        }
-      };
+  const handleCreateWorkoutPlan = async (workoutPlan: WorkoutPlan) => {
+    setModalVisible(false);
+    const loadedWorkoutPlans = await FileHandler.getWorkoutplans();
+    if (loadedWorkoutPlans) {
+      if (loadedWorkoutPlans.find((plan) => plan.name === workoutPlan.name)) {
+        alert("Workoutplan already exists");
+        return;
+      } else {
+        const updatedWorkoutPlans = [...loadedWorkoutPlans, workoutPlan];
+        await FileHandler.saveData('workoutplans', updatedWorkoutPlans);
+        onWorkoutPlanAdded(workoutPlan); // Notify parent component
+      }
+    } else {
+      const updatedWorkoutPlans = [workoutPlan];
+      await FileHandler.saveData('workoutplans', updatedWorkoutPlans);
+      onWorkoutPlanAdded(workoutPlan); // Notify parent component
+    }
+  };
 
     return (
     <View style={[styles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
       <Pressable style={styles.button} onPress={() => setModalVisible(true)}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
-      <PopUpSelectExerciseToAdd visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
+      <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
     </View>
   );
 }

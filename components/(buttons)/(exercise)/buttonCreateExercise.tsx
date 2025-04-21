@@ -27,8 +27,6 @@ export default function ButtonCreateExercise({ label, onExerciseCreate }: Props)
                 }
             }
         });
-        
-        console.log(exercise);
       };
 
     return (

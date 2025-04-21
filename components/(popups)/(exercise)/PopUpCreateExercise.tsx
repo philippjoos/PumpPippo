@@ -6,7 +6,7 @@ import { TextInput } from "react-native-gesture-handler";
 interface PopupModalProps {
     visible: boolean;
     onClose: () => void;
-    onConfirm: (exercise: { name: string; muscle_group: string; equipment: string }) => void;
+    onConfirm: (exercise: Exercise) => void;
     title: string;
 }
 
@@ -16,12 +16,16 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
     const [equipment, setEquipment] = useState("");
 
     const addExercise = () => {
-        const exercise: Exercise = {
-            name: exerciseName,
-            muscle_group: muscle_group,
-            equipment: equipment,
-        };
-        onConfirm(exercise);
+        if (exerciseName == "" || muscle_group == "" || equipment == "") {
+            alert("One or more fields are empty, please fill out all the required fields!");
+        }else{
+            const exercise: Exercise = {
+                name: exerciseName,
+                muscle_group: muscle_group,
+                equipment: equipment,
+            };
+            onConfirm(exercise);
+        }
         setExerciseName("");
         setMuscleGroup("");
         setEquipment("");
@@ -41,11 +45,11 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.content}>{ }</Text>
                     <View style={styles.lineContainer}>
-                        <Text style={styles.content}>Workoutname: </Text>
+                        <Text style={styles.content}>Exercise: </Text>
                         <TextInput style={styles.textbox} placeholder="" value={exerciseName} onChangeText={setExerciseName} />
                     </View>
                     <View style={styles.lineContainer}>
-                        <Text style={styles.content}>Muskelgruppe: </Text>
+                        <Text style={styles.content}>Muscle Group: </Text>
                         <TextInput style={styles.textbox} placeholder="" value={muscle_group} onChangeText={setMuscleGroup} />
                     </View>
                     <View style={styles.lineContainer}>

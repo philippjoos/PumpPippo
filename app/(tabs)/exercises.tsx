@@ -8,7 +8,10 @@ import ButtonDeleteExercise from '@/components/(buttons)/(exercise)/buttonDelete
 export type Exercise = {
   name: string;
   muscle_group: string;
-  equipment: string;
+  equipment?: string;
+  sets?: string;
+  reps?: string;
+  weight?: string;
 };
 
 export default function exercises() {
@@ -44,7 +47,6 @@ export default function exercises() {
     });
   };
 
-  console.log(exercises);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
@@ -52,7 +54,7 @@ export default function exercises() {
           exercises.map((exercise) => (
             <View key={exercise.name} style={styles.exerciseContainer}>
               <Text style={styles.exerciseName}>{exercise.name}</Text>
-              <Text style={styles.exerciseInfo}>Muskelgruppe: {exercise.muscle_group}</Text>
+              <Text style={styles.exerciseInfo}>Muscle Group: {exercise.muscle_group}</Text>
               <Text style={styles.exerciseInfo}>Equipment: {exercise.equipment}</Text>
               <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteWorkoutPlan} />
             </View>
