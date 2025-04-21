@@ -32,7 +32,7 @@ export default function ButtonViewInfo({ label, workoutplan }: Props) {
   };
 
   return (
-    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+    <View style={[containerStyles.buttonContainer]}>
       <Pressable style={buttonStyles.button} onPress={showExercises}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>

@@ -11,7 +11,6 @@ import { Exercise } from '@/app/(tabs)/exercises';
 import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import defaultStyles from '@/assets/styles/defaultStyles';
 
 export type WorkoutPlan = {
   name: string;

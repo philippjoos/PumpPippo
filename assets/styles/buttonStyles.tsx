@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const buttonStyles = StyleSheet.create({
     buttonCreate: {
-        backgroundColor: 'rgba(85, 201, 247, 0.1)',
+        backgroundColor: '#6D28D9',
         borderRadius: 50,
         padding: 10,
         position: 'absolute',
@@ -19,6 +19,7 @@ const buttonStyles = StyleSheet.create({
         alignItems: 'baseline',
         justifyContent: 'center',
         flexDirection: 'row',
+        backgroundColor: '#6D28D9',
       },
 });
 

@@ -31,7 +31,7 @@ export default function ButtonDeleteWorkoutplan({ label, workoutplan, onDelete }
   };
 
     return (
-      <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+      <View style={[containerStyles.buttonContainer]}>
         <Pressable style={buttonStyles.button} onPress={showMessage}>
           <Text style={textStyles.buttonLabel}>{label}</Text>
         </Pressable>

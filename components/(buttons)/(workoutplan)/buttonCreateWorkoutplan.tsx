@@ -38,7 +38,7 @@ export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: P
   };
 
     return (
-    <View style={[containerStyles.buttonContainer, { borderWidth: 1, borderColor: 'white', borderRadius: 18 },]}>
+    <View style={[containerStyles.buttonContainer]}>
       <Pressable style={buttonStyles.button} onPress={() => setModalVisible(true)}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
