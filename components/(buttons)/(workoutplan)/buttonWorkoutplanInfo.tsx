@@ -1,13 +1,13 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { useState } from 'react';
 import PopUpWorkoutInfo from '@/components/(popups)/(workoutplan)/PopUpWorkoutInfo';
 import FileHandler from '@/utils/fileHandler';
+import { Exercise } from '@/app/(tabs)/exercises';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import defaultStyles from '@/assets/styles/defaultStyles';
 
 type Props = {
   label: string;
@@ -16,17 +16,18 @@ type Props = {
 
 export default function ButtonViewInfo({ label, workoutplan }: Props) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+  const [planExercises, setPlanExercises] = useState<Exercise[]>([]);
 
   const showExercises = () => {
-    let exercisesText = "no workoutplan found";
     FileHandler.getWorkoutplans().then((plans) => {
       if (plans) {
-        const plan = plans.find((plan) => plan.name === workoutplan);
-        plan?.exercises.map((exercise) => {
-          exercisesText = "Exercise: " + exercise.name + "\nSets: " + exercise.sets + "\nReps: " + exercise.reps + "\nWeight: " + exercise.weight;})
+        let plan = plans.find((plan) => plan.name === workoutplan);
+        if (plan) {
+          setPlanExercises(plan.exercises);
+        } else {
+          setPlanExercises([]);
+        }
       }
-      setModalContent(exercisesText);
     });
     setModalVisible(true);
   };
@@ -36,7 +37,7 @@ export default function ButtonViewInfo({ label, workoutplan }: Props) {
       <Pressable style={buttonStyles.buttonWorkoutPlans} onPress={showExercises}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
-       <PopUpWorkoutInfo visible={modalVisible} onClose={() => setModalVisible(false)} title={workoutplan} content={modalContent} />
+      <PopUpWorkoutInfo visible={modalVisible} onClose={() => setModalVisible(false)} title={workoutplan} exercises={planExercises} />
     </View>
   );
 }

@@ -43,6 +43,13 @@ const textStyles = StyleSheet.create({
         marginBottom: 5,
         color: "#A1A1AA",
     },
+    ExerciseTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginBottom: 5,
+        color: "#A1A1AA",
+    },
 });
 
 export default textStyles;
