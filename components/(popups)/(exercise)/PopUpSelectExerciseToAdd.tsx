@@ -35,14 +35,13 @@ export default function PopUpSelectExerciseToAdd({ visible, onClose, onExerciseS
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={defaultStyles.modalBackground}>
-        <View style={containerStyles.modalContainer}>
+        <View style={containerStyles.exerciseContainer}>
           <Text style={textStyles.title}>Select an Exercise to add to your workoutplan:</Text>
           <ScrollView style={defaultStyles.scrollViewSelectExerciseToAdd}>
             {exercises.map((exercise: Exercise) => (
-              <View>
+              <View style={containerStyles.buttonSelectExerciseToAddContainer} key={exercise.name}>
                 <Button key={exercise.name} title={exercise.name} onPress={() => handleExerciseSelected(exercise)} color={'#6D28D9'} />
               </View>
-
             ))}
           </ScrollView>
         </View>

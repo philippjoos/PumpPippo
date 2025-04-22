@@ -25,6 +25,14 @@ const containerStyles = StyleSheet.create({
     width: '25%',
     paddingVertical: 10,
   },
+  buttonSelectExerciseToAddContainer: {
+    marginBottom: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    padding: 1,
+    width: "100%",
+    maxHeight: "100%",
+  },
   buttonCreate: {
     backgroundColor: '#6D28D9',
     borderRadius: 50,
@@ -73,6 +81,16 @@ const containerStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#1F1F1F",
   },
+  gridContainer: {
+    flexDirection: "column",
+    gap: 15, // Abstand zwischen den Zeilen
+    marginVertical: 20,
+},
+rowContainer: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+},
 });
 
 export default containerStyles;

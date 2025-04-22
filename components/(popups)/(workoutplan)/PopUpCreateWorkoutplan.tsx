@@ -41,7 +41,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
       })),
     };
   };
-;
+  ;
 
   const handleCreate = () => {
     const workoutPlan = buildWorkoutplan();
@@ -61,57 +61,61 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
         <View style={containerStyles.modalContainer}>
           <Text style={textStyles.title}>{title}</Text>
           <Text style={textStyles.content}>{ }</Text>
-          <View style={containerStyles.lineContainer}>
-            <Text style={textStyles.content}>Workoutname: </Text>
-            <TextInput style={defaultStyles.textbox} placeholder="" onChangeText={setWorkoutplanName} />
+          <View style={containerStyles.gridContainer}>
+            <View style={containerStyles.rowContainer}>
+              <Text style={textStyles.content}>Workoutname: </Text>
+              <TextInput style={defaultStyles.textbox} placeholder="" onChangeText={setWorkoutplanName} />
+            </View>
           </View>
           <ScrollView>
             {selectedExercises.map((exercise, index) => (
               <View key={index}>
-                <Text style={textStyles.content}>{exercise.name}</Text>
-                <View style={containerStyles.lineContainer}>
-                  <Text style={textStyles.content}>Anzahl Sets: </Text>
-                  <TextInput
-                    style={defaultStyles.textbox}
-                    placeholder="Sets"
-                    onChangeText={(text) => {
-                      const updatedExercises = [...selectedExercises];
-                      updatedExercises[index] = { ...updatedExercises[index], sets: text };
-                      setSelectedExercises(updatedExercises);
-                    }}
-                  />
-                </View>
-                <View style={containerStyles.lineContainer}>
-                  <Text style={textStyles.content}>Anzahl Reps: </Text>
-                  <TextInput
-                    style={defaultStyles.textbox}
-                    placeholder="Reps"
-                    onChangeText={(text) => {
-                      const updatedExercises = [...selectedExercises];
-                      updatedExercises[index] = { ...updatedExercises[index], reps: text };
-                      setSelectedExercises(updatedExercises);
-                    }}
-                  />
-                </View>
-                <View style={containerStyles.lineContainer}>
-                  <Text style={textStyles.content}>Gewicht: </Text>
-                  <TextInput
-                    style={defaultStyles.textbox}
-                    placeholder="Weight"
-                    onChangeText={(text) => {
-                      const updatedExercises = [...selectedExercises];
-                      updatedExercises[index] = { ...updatedExercises[index], weight: text };
-                      setSelectedExercises(updatedExercises);
-                    }}
-                  />
+                <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
+                <View style={containerStyles.gridContainer}>
+                  <View style={containerStyles.rowContainer}>
+                    <Text style={textStyles.content}>Anzahl Sets: </Text>
+                    <TextInput
+                      style={defaultStyles.textbox}
+                      placeholder="Sets"
+                      onChangeText={(text) => {
+                        const updatedExercises = [...selectedExercises];
+                        updatedExercises[index] = { ...updatedExercises[index], sets: text };
+                        setSelectedExercises(updatedExercises);
+                      }}
+                    />
+                  </View>
+                  <View style={containerStyles.rowContainer}>
+                    <Text style={textStyles.content}>Anzahl Reps: </Text>
+                    <TextInput
+                      style={defaultStyles.textbox}
+                      placeholder="Reps"
+                      onChangeText={(text) => {
+                        const updatedExercises = [...selectedExercises];
+                        updatedExercises[index] = { ...updatedExercises[index], reps: text };
+                        setSelectedExercises(updatedExercises);
+                      }}
+                    />
+                  </View>
+                  <View style={containerStyles.rowContainer}>
+                    <Text style={textStyles.content}>Gewicht: </Text>
+                    <TextInput
+                      style={defaultStyles.textbox}
+                      placeholder="Weight"
+                      onChangeText={(text) => {
+                        const updatedExercises = [...selectedExercises];
+                        updatedExercises[index] = { ...updatedExercises[index], weight: text };
+                        setSelectedExercises(updatedExercises);
+                      }}
+                    />
+                  </View>
                 </View>
               </View>
             ))}
           </ScrollView>
           <View style={containerStyles.buttonContainer}>
-            <Button title="Create" onPress={handleCreate} color={'#6D28D9'}/>
-            <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} color={'#6D28D9'}/>
-            <Button title="Close" onPress={onClosing} color={'#6D28D9'}/>
+            <Button title="Create" onPress={handleCreate} color={'#6D28D9'} />
+            <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} color={'#6D28D9'} />
+            <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
           </View>
         </View>
       </View>

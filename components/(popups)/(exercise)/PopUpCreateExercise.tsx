@@ -23,7 +23,7 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
     const addExercise = () => {
         if (exerciseName == "" || muscle_group == "" || equipment == "") {
             alert("One or more fields are empty, please fill out all the required fields!");
-        }else{
+        } else {
             const exercise: Exercise = {
                 name: exerciseName,
                 muscle_group: muscle_group,
@@ -49,21 +49,24 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                 <View style={containerStyles.modalContainer}>
                     <Text style={textStyles.title}>{title}</Text>
                     <Text style={textStyles.content}>{ }</Text>
-                    <View style={containerStyles.lineContainer}>
-                        <Text style={textStyles.content}>Exercise: </Text>
-                        <TextInput style={defaultStyles.textbox} placeholder="" value={exerciseName} onChangeText={setExerciseName} />
+                    <View style={containerStyles.gridContainer}>
+                        <View style={containerStyles.rowContainer}>
+                            <Text style={textStyles.textBoxLabel}>Exercise Name: </Text>
+                            <TextInput style={defaultStyles.textbox} placeholder="" value={exerciseName} onChangeText={setExerciseName} />
+                        </View>
+                        <View style={containerStyles.rowContainer}>
+                            <Text style={textStyles.textBoxLabel}>Muscle Group: </Text>
+                            <TextInput style={defaultStyles.textbox} placeholder="" value={muscle_group} onChangeText={setMuscleGroup} />
+                        </View>
+                        <View style={containerStyles.rowContainer}>
+                            <Text style={textStyles.textBoxLabel}>Equipment: </Text>
+                            <TextInput style={defaultStyles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
+                        </View>
                     </View>
-                    <View style={containerStyles.lineContainer}>
-                        <Text style={textStyles.content}>Muscle Group: </Text>
-                        <TextInput style={defaultStyles.textbox} placeholder="" value={muscle_group} onChangeText={setMuscleGroup} />
-                    </View>
-                    <View style={containerStyles.lineContainer}>
-                        <Text style={textStyles.content}>Equipment: </Text>
-                        <TextInput style={defaultStyles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
-                    </View>
+
                     <View style={containerStyles.buttonContainer}>
-                        <Button title="Create" onPress={addExercise} color={'#6D28D9'}/>
-                        <Button title="Close" onPress={onClosing} color={'#6D28D9'}/>
+                        <Button title="Create" onPress={addExercise} color={'#6D28D9'} />
+                        <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
                     </View>
                 </View>
             </View>

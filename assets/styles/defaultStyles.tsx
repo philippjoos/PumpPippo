@@ -16,9 +16,9 @@ const defaultStyles = StyleSheet.create({
     borderColor: "#6D28D9",
     borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
     width: '80%',
     color: "#FFFFFF",
+    flex: 2,
   },
   scrollView: {
     width: "100%",
@@ -28,6 +28,7 @@ const defaultStyles = StyleSheet.create({
   scrollViewSelectExerciseToAdd: {
     width: "50%",
     marginTop: 10,
+    padding: 10,
     marginBottom: 20,
   },
 });

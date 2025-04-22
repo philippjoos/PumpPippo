@@ -14,6 +14,12 @@ const textStyles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
     },
+    textBoxLabel: {
+        flex: 1,
+        fontSize: 16,
+        color: "#A1A1AA",
+        marginRight: 10,
+    },
     exerciseName: {
         fontSize: 18,
         fontWeight: 'bold',
