@@ -38,9 +38,12 @@ export default function PopUpSelectExerciseToAdd({ visible, onClose, onExerciseS
       <View style={defaultStyles.modalBackground}>
         <View style={containerStyles.modalContainer}>
           <Text style={textStyles.title}>Select an Exercise to add to your workoutplan:</Text>
-          <ScrollView>
+          <ScrollView style={defaultStyles.scrollViewSelectExerciseToAdd}>
             {exercises.map((exercise: Exercise) => (
-              <Button key={exercise.name} title={exercise.name} onPress={() => handleExerciseSelected(exercise)} />
+              <View>
+                <Button key={exercise.name} title={exercise.name} onPress={() => handleExerciseSelected(exercise)} color={'#6D28D9'} />
+              </View>
+
             ))}
           </ScrollView>
         </View>

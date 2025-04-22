@@ -17,10 +17,16 @@ const defaultStyles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    width: "100%",
+    width: '80%',
+    color: "#FFFFFF",
   },
   scrollView: {
     width: "100%",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  scrollViewSelectExerciseToAdd: {
+    width: "50%",
     marginTop: 10,
     marginBottom: 20,
   },

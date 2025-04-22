@@ -40,7 +40,7 @@ const textStyles = StyleSheet.create({
     content: {
         fontSize: 16,
         textAlign: "center",
-        marginBottom: 20,
+        marginBottom: 5,
         color: "#A1A1AA",
     },
 });

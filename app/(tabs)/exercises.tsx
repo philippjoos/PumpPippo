@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import FileHandler from '@/utils/fileHandler';
@@ -6,7 +6,6 @@ import ButtonCreateExercise from '@/components/(buttons)/(exercise)/buttonCreate
 import ButtonDeleteExercise from '@/components/(buttons)/(exercise)/buttonDeleteExercise';
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 

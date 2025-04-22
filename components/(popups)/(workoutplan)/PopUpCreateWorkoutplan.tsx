@@ -109,10 +109,10 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
               </View>
             ))}
           </ScrollView>
-          <View style={defaultStyles.buttonRow}>
-            <Button title="Create" onPress={handleCreate} />
-            <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} />
-            <Button title="Close" onPress={onClosing} />
+          <View style={containerStyles.buttonContainer}>
+            <Button title="Create" onPress={handleCreate} color={'#6D28D9'}/>
+            <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} color={'#6D28D9'}/>
+            <Button title="Close" onPress={onClosing} color={'#6D28D9'}/>
           </View>
         </View>
       </View>
