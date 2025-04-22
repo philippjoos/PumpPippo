@@ -1,11 +1,10 @@
-import { Modal, View, Text, Button, StyleSheet } from "react-native";
+import { Modal, View, Text, Button } from "react-native";
 import FileHandler from '@/utils/fileHandler';
 import { Exercise } from "@/app/(tabs)/exercises";
 import { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';

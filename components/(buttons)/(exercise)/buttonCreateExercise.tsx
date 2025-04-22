@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { useState } from "react";
 import PopUpCreateExercise from '../../(popups)/(exercise)/PopUpCreateExercise';
 import { Exercise } from '@/app/(tabs)/exercises';
@@ -6,7 +6,6 @@ import FileHandler from '@/utils/fileHandler';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
-import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 
 type Props = {

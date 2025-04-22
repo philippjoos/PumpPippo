@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { useState } from "react";
 import PopUpDeleteWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpDeleteWorkoutplan';
 
@@ -6,7 +6,6 @@ import PopUpDeleteWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpDel
 import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import defaultStyles from '@/assets/styles/defaultStyles';
 
 type Props = {
   label: string;

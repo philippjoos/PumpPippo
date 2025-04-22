@@ -1,4 +1,4 @@
-import { Modal, View, Text, Button, StyleSheet } from "react-native";
+import { Modal, View, Text, Button } from "react-native";
 
 // styles imports
 import containerStyles from '@/assets/styles/containerStyles';

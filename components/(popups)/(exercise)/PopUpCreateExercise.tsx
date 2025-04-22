@@ -1,6 +1,6 @@
 import { Exercise } from "@/app/(tabs)/exercises";
 import React, { useState } from "react";
-import { Modal, View, Text, Button, StyleSheet } from "react-native";
+import { Modal, View, Text, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 // styles imports

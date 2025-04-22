@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Modal, View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import { Modal, View, Text, Button, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import PopUpSelectExerciseToAdd from "../(exercise)/PopUpSelectExerciseToAdd";
 import { Exercise } from "@/app/(tabs)/exercises";
 import { WorkoutPlan } from "@/app/(tabs)/workoutplan";
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, View, Text, Button } from "react-native";
 import { Exercise } from "@/app/(tabs)/exercises";
 
@@ -6,7 +6,6 @@ import { Exercise } from "@/app/(tabs)/exercises";
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
-
 
 interface PopupModalProps {
   visible: boolean;

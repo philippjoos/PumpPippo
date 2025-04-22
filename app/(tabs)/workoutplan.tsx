@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import ButtonStartWorkout from '@/components/(buttons)/(workoutplan)/buttonStartWorkout';
 import ButtonViewInfo from '@/components/(buttons)/(workoutplan)/buttonWorkoutplanInfo';
 import ButtonDeleteWorkoutplan from '@/components/(buttons)/(workoutplan)/buttonDeleteWorkoutplan';
@@ -8,7 +8,6 @@ import ButtonCreateWorkoutplan from '@/components/(buttons)/(workoutplan)/button
 import { Exercise } from '@/app/(tabs)/exercises';
 
 // styles imports
-import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 
