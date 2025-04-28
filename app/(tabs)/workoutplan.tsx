@@ -10,6 +10,7 @@ import { Exercise } from '@/app/(tabs)/exercises';
 // styles imports
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
+import { router } from 'expo-router';
 
 export type WorkoutPlan = {
   name: string;
