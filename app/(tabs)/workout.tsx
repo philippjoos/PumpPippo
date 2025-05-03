@@ -1,14 +1,15 @@
 import containerStyles from '@/assets/styles/containerStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
 import textStyles from '@/assets/styles/textStyles';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Exercise } from '@/app/(tabs)/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSearchParams } from 'expo-router/build/hooks';
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 import ButtonStartTimerAfterExercise from '@/components/(buttons)/(workout)/buttonStartTimerAfterExercise';
-
+import ButtonNextExercise from '@/components/(buttons)/(workout)/buttonNextExercise';
+import ButtonPreviousExercise from '@/components/(buttons)/(workout)/buttonPreviousExercise';
 
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -48,9 +49,9 @@ export default function workout() {
       </View>
       <View style={[containerStyles.currentExerciseContainer, { flex: 1 }]}>
         {/* Container for current executed exercise */}
+        <Text style={textStyles.title}>current exercise:</Text>
         {currentExercise ? (
           <>
-            <Text style={textStyles.title}>current exercise:</Text>
             <View style={containerStyles.exerciseContainer}>
               <Text style={textStyles.exerciseName}>{currentExercise.name}</Text>
               <Text style={textStyles.content}></Text>
@@ -59,7 +60,15 @@ export default function workout() {
           </>
         ) : null}
         <View style={containerStyles.buttonStartTimerAfterWorkoutContainer}>
-          <ButtonStartTimerAfterExercise label="Timer" />
+          <View>
+            <ButtonPreviousExercise />
+          </View>
+          <View>
+            <ButtonStartTimerAfterExercise />
+          </View>
+          <View>
+            <ButtonNextExercise />
+          </View>
         </View>
       </View>
     </View>

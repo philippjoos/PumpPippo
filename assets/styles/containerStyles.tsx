@@ -63,10 +63,12 @@ const containerStyles = StyleSheet.create({
   },
   buttonStartTimerAfterWorkoutContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     position: "absolute", // Positioniere den Button absolut
     bottom: 10, // Abstand vom unteren Rand
     alignSelf: "center", // Zentriere den Button horizontal
+    width: '30%',
   },
   // Styles from buttonCreateWorkoutplan.tsx
   createButtonContainer: {

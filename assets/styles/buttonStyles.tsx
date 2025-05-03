@@ -1,3 +1,4 @@
+import ButtonNextExercise from "@/components/(buttons)/(workout)/buttonNextExercise";
 import { StyleSheet } from "react-native";
 
 const buttonStyles = StyleSheet.create({
@@ -49,8 +50,19 @@ const buttonStyles = StyleSheet.create({
         justifyContent: 'center', // Center the content inside the button
         width: 60, // Breite des Buttons
         height: 60, // Höhe des Buttons
+        elevation: 5,
+      },
+      ButtonNavigateExercise: {
+        backgroundColor: '#6D28D9',
+        borderRadius: 40,
+        position: 'absolute',
+        bottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the content inside the button
+        width: 45, // Breite des Buttons
+        height: 45, // Höhe des Buttons
         elevation: 5, // Schatten für ein besseres visuelles Feedback
-      }
+      },
 
 });
 
