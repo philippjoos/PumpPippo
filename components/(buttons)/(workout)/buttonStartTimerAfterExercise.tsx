@@ -4,13 +4,17 @@ import { Ionicons } from '@expo/vector-icons';
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
 
-export default function buttonStartTimerafterWorkout() {
+interface Props {
+    onPress: () => void; // Function to be called when the button is pressed
+}
+
+export default function buttonStartTimerafterWorkout({ onPress }: Props) {
 
     return (
-    <View>
-        <Pressable style={buttonStyles.buttonStartTimerAfterWorkout} onPress={() => alert("Timer started")}>
-            <Ionicons name="timer-outline" size={24} color="white" />
-        </Pressable>
-    </View>
-  );
+        <View>
+            <Pressable style={buttonStyles.buttonStartTimerAfterWorkout} onPress={onPress}>
+                <Ionicons name="timer-outline" size={24} color="white" />
+            </Pressable>
+        </View>
+    );
 }

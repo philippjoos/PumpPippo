@@ -8,7 +8,7 @@ export default function ButtonPreviousExercise() {
 
     return (
     <View>
-        <Pressable style={buttonStyles.ButtonNavigateExercise} onPress={() => alert("Previous Exercise")}>
+        <Pressable style={buttonStyles.buttonNavigateExercise} onPress={() => alert("Previous Exercise")}>
             <Ionicons name="play-skip-back-circle-outline" size={24} color="white" />
         </Pressable>
     </View>
