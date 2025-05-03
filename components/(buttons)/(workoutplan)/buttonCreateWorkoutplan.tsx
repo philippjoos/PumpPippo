@@ -1,4 +1,4 @@
-import { View, Pressable, Text } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { useState } from "react";
 import PopUpCreateWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpCreateWorkoutplan';
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
-import textStyles from '@/assets/styles/textStyles';
 
 type Props = {
   label: string;

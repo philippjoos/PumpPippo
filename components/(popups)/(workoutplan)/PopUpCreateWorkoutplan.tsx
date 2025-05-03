@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, View, Text, Button, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import PopUpSelectExerciseToAdd from "../(exercise)/PopUpSelectExerciseToAdd";
-import { Exercise } from "@/app/(tabs)/exercises";
+import { Exercise, Sets } from "@/app/(tabs)/exercises";
 import { WorkoutPlan } from "@/app/(tabs)/workoutplan";
 
 // styles imports
@@ -22,7 +22,8 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   const [workoutplanName, setWorkoutplanName] = useState("");
   const [selectExerciseVisible, setSelectExerciseVisible] = useState(false); // State to manage the visibility of the exercise selection popup
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]); // State to manage the selected exercises
-
+  const [sets, setSets] = useState<{ [exerciseIndex: number]: Sets[] }>({});
+  
   const handleExerciseSelected = (exercise: Exercise) => {
     setSelectedExercises([...selectedExercises, exercise]); // Add the exercise name to the list
     setSelectExerciseVisible(false); // Close the exercise selection popup
@@ -32,28 +33,60 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   const buildWorkoutplan = (): WorkoutPlan => {
     return {
       name: workoutplanName,
-      exercises: selectedExercises.map((exercise) => ({
+      exercises: selectedExercises.map((exercise, exerciseIndex) => ({
         name: exercise.name,
         muscle_group: exercise.muscle_group, // Include the required muscle_group property
-        sets: exercise.sets || "",
-        reps: exercise.reps || "",
-        weight: exercise.weight || "",
+        sets: sets[exerciseIndex] || [], // Get the sets for the current exercise
+        equipment: exercise.equipment, // Include the required equipment property
       })),
     };
   };
-  ;
 
   const handleCreate = () => {
     const workoutPlan = buildWorkoutplan();
     onConfirm(workoutPlan); // Call the onConfirm function with the workout plan name
     onClosing(); // Close the modal after creating the workout plan
+    
   }
 
   const onClosing = () => {
     setWorkoutplanName("");
     setSelectedExercises([]);
+    setSets([]);
     onClose();
   }
+
+  const onAddSet = (exerciseIndex: number) => {
+    setSets((prevSets) => ({
+      ...prevSets,
+      [exerciseIndex]: [
+        ...(prevSets[exerciseIndex] || []),
+        { setCount: (prevSets[exerciseIndex]?.length || 0) + 1, reps: 0, weight: 0, rest_time: 0 },
+      ],
+    }));
+  };
+
+  const onModifySet = (text: string, exerciseIndex: number, setIndex: number, row: string) => {
+    if (/^\d*$/.test(text)) { // Überprüft, ob der Text nur aus Zahlen besteht
+      setSets((prevSets) => {
+        const updatedSets = [...(prevSets[exerciseIndex] || [])];
+        switch (row) {
+          case "reps":
+            updatedSets[setIndex] = { ...updatedSets[setIndex], reps: parseInt(text) || 0 };
+            break;
+          case "rest_time":
+            updatedSets[setIndex] = { ...updatedSets[setIndex], rest_time: parseInt(text) || 0 };
+            break;
+          case "weight":
+            updatedSets[setIndex] = { ...updatedSets[setIndex], weight: parseInt(text) || 0 };
+            break;
+        }
+        return { ...prevSets, [exerciseIndex]: updatedSets };
+      });
+    } else {
+      alert("Please enter a valid number!");
+    }
+  };
 
   return (
     <Modal visible={visible} transparent animationType="slide">
@@ -68,49 +101,45 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
             </View>
           </View>
           <ScrollView>
-            {selectedExercises.map((exercise, index) => (
-              <View key={index}>
-                <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
-                <View style={containerStyles.gridContainer}>
-                  <View style={containerStyles.rowContainer}>
-                    <Text style={textStyles.content}>Anzahl Sets: </Text>
-                    <TextInput
-                      style={defaultStyles.textbox}
-                      placeholder="Sets"
-                      onChangeText={(text) => {
-                        const updatedExercises = [...selectedExercises];
-                        updatedExercises[index] = { ...updatedExercises[index], sets: text };
-                        setSelectedExercises(updatedExercises);
-                      }}
-                    />
-                  </View>
-                  <View style={containerStyles.rowContainer}>
-                    <Text style={textStyles.content}>Anzahl Reps: </Text>
-                    <TextInput
-                      style={defaultStyles.textbox}
-                      placeholder="Reps"
-                      onChangeText={(text) => {
-                        const updatedExercises = [...selectedExercises];
-                        updatedExercises[index] = { ...updatedExercises[index], reps: text };
-                        setSelectedExercises(updatedExercises);
-                      }}
-                    />
-                  </View>
-                  <View style={containerStyles.rowContainer}>
-                    <Text style={textStyles.content}>Gewicht: </Text>
-                    <TextInput
-                      style={defaultStyles.textbox}
-                      placeholder="Weight"
-                      onChangeText={(text) => {
-                        const updatedExercises = [...selectedExercises];
-                        updatedExercises[index] = { ...updatedExercises[index], weight: text };
-                        setSelectedExercises(updatedExercises);
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-            ))}
+          {selectedExercises.map((exercise, exerciseIndex) => (
+  <View key={exerciseIndex}>
+    <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
+    {(sets[exerciseIndex] || []).map((set, setIndex) => (
+      <View key={setIndex} style={containerStyles.gridContainer}>
+        <Text style={textStyles.textBoxLabel}>Set: {set.setCount}</Text>
+        <View style={containerStyles.rowContainer}>
+          <Text style={textStyles.textBoxLabel}>Reps: </Text>
+          <TextInput
+            style={defaultStyles.textbox}
+            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'reps')}
+            value={set.reps.toString()}
+          />
+        </View>
+        <View style={containerStyles.rowContainer}>
+          <Text style={textStyles.textBoxLabel}>Weight: </Text>
+          <TextInput
+            style={defaultStyles.textbox}
+            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'weight')}
+            value={set.weight.toString()}
+          />
+        </View>
+        <View style={containerStyles.rowContainer}>
+          <Text style={textStyles.textBoxLabel}>Rest-Time: </Text>
+          <TextInput
+            style={defaultStyles.textbox}
+            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'rest_time')}
+            value={(set.rest_time ?? 0).toString()}
+          />
+        </View>
+      </View>
+    ))}
+    <View style={containerStyles.gridContainer}>
+      <View style={containerStyles.rowContainer}>
+        <Button title="Add Set" onPress={() => onAddSet(exerciseIndex)} color={'#6D28D9'} />
+      </View>
+    </View>
+  </View>
+))}
           </ScrollView>
           <View style={containerStyles.buttonContainer}>
             <Button title="Create" onPress={handleCreate} color={'#6D28D9'} />
@@ -127,7 +156,5 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
         onExerciseSelected={handleExerciseSelected} // Pass the selected exercise to the handler
       />
     </Modal >
-
-
   );
 }

@@ -51,13 +51,13 @@ export default function workout() {
 
   const startTimer = () => {
     if(currentExercise){
-      setTimer(2);
+      setTimer(currentExercise.sets?.[currentSetIndex]?.rest_time || 180); // Set the timer to the rest time of the current set
       setIsTimerRunning(true);
     }
   }
 
   const handleTimerEnd = () => {
-    if (currentExercise && currentSetIndex < parseInt(currentExercise.sets || '0') - 1) {
+    if (currentExercise && currentSetIndex < (currentExercise.sets?.length ?? 0) - 1) {
       // Nächstes Set anzeigen
       setCurrentSetIndex((prev) => prev + 1);
     } else if (currentExerciseIndex < exercises.length - 1) {
@@ -91,8 +91,15 @@ export default function workout() {
               {exercises.map((exercise) => (
                 <View key={exercise.name} style={containerStyles.exerciseContainer}>
                   <Text style={textStyles.exerciseName}>{exercise.name}</Text>
-                  <Text style={textStyles.content}>Reps: {exercise.reps}</Text>
-                  <Text style={textStyles.content}>Sets: {exercise.sets}</Text>
+                  <Text style={textStyles.content}>Sets: {exercise.sets?.length}</Text>
+                  {exercise.sets?.map((set, index) => (
+                    <View key={index} style={containerStyles.rowContainer}>
+                      <Text style={textStyles.content}>Set {set.setCount}: </Text>
+                      <Text style={textStyles.content}>Reps: {set.reps}</Text>
+                      <Text style={textStyles.content}>Weight: {set.weight}</Text>
+                      <Text style={textStyles.content}>Rest Time: {set.rest_time} seconds</Text>
+                    </View>
+                  ))}
                 </View>
               ))}
             </>
@@ -108,10 +115,10 @@ export default function workout() {
             <View style={containerStyles.exerciseContainer}>
                 <Text style={textStyles.exerciseName}>{currentExercise.name}</Text>
                 <Text style={textStyles.content}>
-                  Set {currentSetIndex + 1} of {currentExercise.sets}
+                  Set {currentSetIndex + 1} of {currentExercise.sets?.length}
                 </Text>
-                <Text style={textStyles.content}>Reps: {currentExercise.reps}</Text>
-                <Text style={textStyles.content}>Weight: {currentExercise.weight || 'N/A'}</Text>
+                <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
+                <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
             </View>
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
           </>

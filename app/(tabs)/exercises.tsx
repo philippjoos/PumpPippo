@@ -9,13 +9,20 @@ import ButtonDeleteExercise from '@/components/(buttons)/(exercise)/buttonDelete
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 
+// type Sets 
+export type Sets = {
+  setCount: number;
+  reps: number;
+  weight: number;
+  rest_time?: number; // in seconds
+}
+
+// type Exercise
 export type Exercise = {
   name: string;
   muscle_group: string;
   equipment?: string;
-  sets?: string;
-  reps?: string;
-  weight?: string;
+  sets?: Sets[]; 
 };
 
 export default function exercises() {
@@ -30,7 +37,12 @@ export default function exercises() {
           {
             "name": "Langhantel Bankdrücken",
             "muscle_group": "Brust",
-            "equipment": "Langhantel, Bank"
+            "equipment": "Langhantel, Bank",
+            sets: [
+              {count: 1, reps: 10, weight: 60, rest_time: 180},
+              {count: 2, reps: 8, weight: 70, rest_time: 180},
+              {count: 3, reps: 6, weight: 80, rest_time: 180},
+            ],
           },
         ]);
       }
@@ -41,7 +53,7 @@ export default function exercises() {
     setExercises((prevExercises) => [...prevExercises, newExercise]);
   };
 
-  const deleteWorkoutPlan = (workoutplanName: string) => {
+  const deleteExercise = (workoutplanName: string) => {
     FileHandler.getExercises().then((exercises) => {
       if(exercises){
         const newExercises = exercises.filter((exercise) => exercise.name !== workoutplanName);
@@ -60,7 +72,7 @@ export default function exercises() {
               <Text style={textStyles.exerciseName}>{exercise.name}</Text>
               <Text style={textStyles.content}>Muscle Group: {exercise.muscle_group}</Text>
               <Text style={textStyles.content}>Equipment: {exercise.equipment}</Text>
-              <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteWorkoutPlan} />
+              <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteExercise} />
             </View>
           ))}
       </ScrollView>

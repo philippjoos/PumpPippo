@@ -1,4 +1,4 @@
-import { Exercise } from "@/app/(tabs)/exercises";
+import { Exercise, Sets } from "@/app/(tabs)/exercises";
 import React, { useState } from "react";
 import { Modal, View, Text, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
@@ -19,6 +19,7 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
     const [exerciseName, setExerciseName] = useState("");
     const [muscle_group, setMuscleGroup] = useState("");
     const [equipment, setEquipment] = useState("");
+    const [sets, setSets] = useState<Sets[]>([]);
 
     const addExercise = () => {
         if (exerciseName == "" || muscle_group == "" || equipment == "") {
@@ -28,6 +29,11 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                 name: exerciseName,
                 muscle_group: muscle_group,
                 equipment: equipment,
+                sets: [
+                    { setCount: 1, reps: 10, weight: 60, rest_time: 180 },
+                    { setCount: 2, reps: 8, weight: 60, rest_time: 180 },
+                    { setCount: 3, reps: 6, weight: 60, rest_time: 180 },
+                ],
             };
             onConfirm(exercise);
         }
@@ -42,6 +48,7 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
         setEquipment("");
         onClose();
     }
+  
 
     return (
         <Modal visible={visible} transparent animationType="slide">
@@ -63,7 +70,6 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                             <TextInput style={defaultStyles.textbox} placeholder="" value={equipment} onChangeText={setEquipment} />
                         </View>
                     </View>
-
                     <View style={containerStyles.buttonContainer}>
                         <Button title="Create" onPress={addExercise} color={'#6D28D9'} />
                         <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
