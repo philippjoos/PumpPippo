@@ -10,7 +10,7 @@ import { Exercise } from '@/app/(tabs)/exercises';
 // styles imports
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import { router } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 export type WorkoutPlan = {
   name: string;
@@ -19,7 +19,8 @@ export type WorkoutPlan = {
 
   export default function WorkoutPlans() {
     const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
-  
+    const router = useRouter();
+
     useEffect(() => {
       FileHandler.getWorkoutplans().then((loadedWorkoutPlans) => {
         if (loadedWorkoutPlans) {
@@ -46,6 +47,10 @@ export type WorkoutPlan = {
     setWorkoutPlans((prevWorkoutPlans) => [...prevWorkoutPlans, newWorkoutPlan]);
   };
 
+  const startWorkout = (workoutplan: string) => {
+    router.push({ pathname: '/workout', params: { workoutPlan: JSON.stringify(workoutplan) } });
+  };
+
   return (
     <View style={containerStyles.container}>
       <Text style={textStyles.text}>Your Workout Plans</Text>
@@ -55,7 +60,7 @@ export type WorkoutPlan = {
             <View key={trainingsplan.name} style={containerStyles.exerciseContainer}>
               <Text style={textStyles.exerciseName}>{trainingsplan.name}</Text>
               <View style={containerStyles.buttonContainer}>
-                <ButtonStartWorkout label="Start" />
+                <ButtonStartWorkout label="Start" workoutplan={trainingsplan}/>
                 <ButtonViewInfo label="View" workoutplan={trainingsplan.name} />
                 <ButtonDeleteWorkoutplan label="Delete" workoutplan={trainingsplan.name} onDelete={deleteWorkoutPlan} />
               </View>

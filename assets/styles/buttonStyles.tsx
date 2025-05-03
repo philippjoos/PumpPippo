@@ -40,6 +40,17 @@ const buttonStyles = StyleSheet.create({
         height: 60, // Höhe des Buttons
         elevation: 5, // Schatten für ein besseres visuelles Feedback
       },
+      buttonStartTimerAfterWorkout: {
+        backgroundColor: '#6D28D9',
+        borderRadius: 50,
+        position: 'absolute',
+        bottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the content inside the button
+        width: 60, // Breite des Buttons
+        height: 60, // Höhe des Buttons
+        elevation: 5, // Schatten für ein besseres visuelles Feedback
+      }
 
 });
 

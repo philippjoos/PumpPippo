@@ -3,6 +3,7 @@ import { useState } from "react";
 import PopUpCreateWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpCreateWorkoutplan';
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 import FileHandler from '@/utils/fileHandler';
+import { Ionicons } from '@expo/vector-icons';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
@@ -38,7 +39,7 @@ export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: P
     return (
     <View>
       <Pressable style={buttonStyles.buttonCreate} onPress={() => setModalVisible(true)}>
-        <Text style={textStyles.buttonLabel}>{label}</Text>
+        <Ionicons name="add-circle-outline" size={24} color="white" />
       </Pressable>
       <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
     </View>
