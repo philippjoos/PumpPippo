@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, View, Text, Button, ScrollView } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import PopUpSelectExerciseToAdd from "../(exercise)/PopUpSelectExerciseToAdd";
-import { Exercise, Sets } from "@/app/(tabs)/exercises";
+import { Exercise, Set } from "@/app/(tabs)/exercises";
 import { WorkoutPlan } from "@/app/(tabs)/workoutplan";
 
 // styles imports
@@ -22,7 +22,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   const [workoutplanName, setWorkoutplanName] = useState("");
   const [selectExerciseVisible, setSelectExerciseVisible] = useState(false); // State to manage the visibility of the exercise selection popup
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]); // State to manage the selected exercises
-  const [sets, setSets] = useState<{ [exerciseIndex: number]: Sets[] }>({});
+  const [sets, setSets] = useState<{ [exerciseIndex: number]: Set[] }>({});
   
   const handleExerciseSelected = (exercise: Exercise) => {
     setSelectedExercises([...selectedExercises, exercise]); // Add the exercise name to the list

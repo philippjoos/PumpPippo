@@ -62,6 +62,15 @@ const buttonStyles = StyleSheet.create({
     height: 45, // Höhe des Buttons
     elevation: 5, // Schatten für ein besseres visuelles Feedback
   },
+  buttonEditCurrentSet: {
+    borderRadius: 10,
+    width: '100%',
+    height: '120%',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#6D28D9',
+  },
 });
 
 export default buttonStyles;

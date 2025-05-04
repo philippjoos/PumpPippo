@@ -10,7 +10,7 @@ import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 
 // type Sets 
-export type Sets = {
+export type Set = {
   setCount: number;
   reps: number;
   weight: number;
@@ -22,7 +22,7 @@ export type Exercise = {
   name: string;
   muscle_group: string;
   equipment?: string;
-  sets?: Sets[]; 
+  sets?: Set[]; 
 };
 
 export default function exercises() {

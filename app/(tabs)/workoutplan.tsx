@@ -47,10 +47,6 @@ export type WorkoutPlan = {
     setWorkoutPlans((prevWorkoutPlans) => [...prevWorkoutPlans, newWorkoutPlan]);
   };
 
-  const startWorkout = (workoutplan: string) => {
-    router.push({ pathname: '/workout', params: { workoutPlan: JSON.stringify(workoutplan) } });
-  };
-
   return (
     <View style={containerStyles.container}>
       <Text style={textStyles.text}>Your Workout Plans</Text>

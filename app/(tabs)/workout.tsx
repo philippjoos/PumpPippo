@@ -1,7 +1,7 @@
 import containerStyles from '@/assets/styles/containerStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
 import textStyles from '@/assets/styles/textStyles';
-import { Alert, Text, View, } from 'react-native';
+import { Text, View, } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Exercise } from '@/app/(tabs)/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,6 +9,8 @@ import { useSearchParams } from 'expo-router/build/hooks';
 import ButtonStartTimerAfterExercise from '@/components/(buttons)/(workout)/buttonStartTimerAfterExercise';
 import ButtonNextExercise from '@/components/(buttons)/(workout)/buttonNextExercise';
 import ButtonPreviousExercise from '@/components/(buttons)/(workout)/buttonPreviousExercise';
+import ButtonEditCurrentSet from '@/components/(buttons)/(workout)/buttonEditCurrentSet';
+import ButtonAddSetToCurrentExercise from '@/components/(buttons)/(workout)/buttonAddSetToCurrentExercise';
 
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -133,6 +135,10 @@ export default function workout() {
               </Text>
               <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
               <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
+              <View style={containerStyles.buttonContainer}>
+              <ButtonAddSetToCurrentExercise />
+              <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan || ''}/>
+              </View>
             </View>
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
           </>
