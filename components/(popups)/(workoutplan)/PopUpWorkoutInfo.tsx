@@ -30,9 +30,9 @@ export default function PopUpWorkoutInfo({ visible, onClose, title, exercises }:
                   <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
                   {exercise.sets?.map((set, index) => (
                     <View key={index} style={containerStyles.rowContainer}>
-                      <Text style={textStyles.content}>Set {set.setCount}: </Text>
-                      <Text style={textStyles.content}>Reps: {set.reps}</Text>
-                      <Text style={textStyles.content}>Weight: {set.weight}</Text>
+                      <Text style={textStyles.title}>Set {set.setCount}:      </Text>
+                      <Text style={textStyles.content}>Reps: {set.reps},      </Text>
+                      <Text style={textStyles.content}>Weight: {set.weight},      </Text>
                       <Text style={textStyles.content}>Rest Time: {set.rest_time} seconds</Text>
                     </View>
                   ))}

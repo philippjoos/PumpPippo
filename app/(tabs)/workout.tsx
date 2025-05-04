@@ -24,12 +24,11 @@ export default function workout() {
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer running state
 
 
-
   useEffect(() => {
     if (workoutPlan) {
       const parsedWorkoutPlan = JSON.parse(workoutPlan as string);
       setExercises(parsedWorkoutPlan.exercises);
-      setCurrentExerciseIndex(0);
+      resetWorkout();
     }
   }, [workoutPlan]);
 
@@ -49,8 +48,15 @@ export default function workout() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
 
+  const resetWorkout = () => {
+    setCurrentExerciseIndex(0);
+    setCurrentSetIndex(0);
+    setTimer(0); // Reset the timer to 0
+    setIsTimerRunning(false); // Stop the timer
+  }
+
   const startTimer = () => {
-    if(currentExercise){
+    if (currentExercise) {
       setTimer(currentExercise.sets?.[currentSetIndex]?.rest_time || 180); // Set the timer to the rest time of the current set
       setIsTimerRunning(true);
     }
@@ -79,6 +85,15 @@ export default function workout() {
     }
   }
 
+  const previousExercise = () => {
+    if (currentExerciseIndex > 0) {
+      setCurrentExerciseIndex((prev) => prev - 1);
+      setCurrentSetIndex(0); // Zurücksetzen auf das erste Set
+    } else {
+      alert('No previous exercises, You are at the first exercise!');
+    }
+  }
+
   return (
     <View style={[containerStyles.container, { flex: 1 }]}>
       <View style={containerStyles.container}>
@@ -91,12 +106,11 @@ export default function workout() {
               {exercises.map((exercise) => (
                 <View key={exercise.name} style={containerStyles.exerciseContainer}>
                   <Text style={textStyles.exerciseName}>{exercise.name}</Text>
-                  <Text style={textStyles.content}>Sets: {exercise.sets?.length}</Text>
                   {exercise.sets?.map((set, index) => (
                     <View key={index} style={containerStyles.rowContainer}>
-                      <Text style={textStyles.content}>Set {set.setCount}: </Text>
-                      <Text style={textStyles.content}>Reps: {set.reps}</Text>
-                      <Text style={textStyles.content}>Weight: {set.weight}</Text>
+                      <Text style={textStyles.content}>Set {set.setCount}:      </Text>
+                      <Text style={textStyles.content}>Reps: {set.reps},     </Text>
+                      <Text style={textStyles.content}>Weight: {set.weight},     </Text>
                       <Text style={textStyles.content}>Rest Time: {set.rest_time} seconds</Text>
                     </View>
                   ))}
@@ -113,25 +127,25 @@ export default function workout() {
         {currentExercise ? (
           <>
             <View style={containerStyles.exerciseContainer}>
-                <Text style={textStyles.exerciseName}>{currentExercise.name}</Text>
-                <Text style={textStyles.content}>
-                  Set {currentSetIndex + 1} of {currentExercise.sets?.length}
-                </Text>
-                <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
-                <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
+              <Text style={textStyles.exerciseName}>{currentExercise.name}</Text>
+              <Text style={textStyles.content}>
+                Set {currentSetIndex + 1} of {currentExercise.sets?.length}
+              </Text>
+              <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
+              <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
             </View>
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
           </>
         ) : null}
         <View style={containerStyles.buttonStartTimerAfterWorkoutContainer}>
           <View>
-            <ButtonPreviousExercise />
+            <ButtonPreviousExercise onPress={previousExercise}/>
           </View>
           <View>
-            <ButtonStartTimerAfterExercise onPress={startTimer}/>
+            <ButtonStartTimerAfterExercise onPress={startTimer} />
           </View>
           <View>
-            <ButtonNextExercise onPress={nextExercise}/>
+            <ButtonNextExercise onPress={nextExercise} />
           </View>
         </View>
       </View>
