@@ -13,7 +13,7 @@ export default function buttonStartTimerafterWorkout({ onPress }: Props) {
     return (
         <View>
             <Pressable style={buttonStyles.buttonStartTimerAfterWorkout} onPress={onPress}>
-                <Ionicons name="timer-outline" size={24} color="white" />
+                <Ionicons name="stopwatch-outline" size={24} color="white" />
             </Pressable>
         </View>
     );

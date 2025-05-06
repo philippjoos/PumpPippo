@@ -53,14 +53,20 @@ export default function workout() {
   const resetWorkout = () => {
     setCurrentExerciseIndex(0);
     setCurrentSetIndex(0);
-    setTimer(0); // Reset the timer to 0
+    setTimer(0);
     setIsTimerRunning(false); // Stop the timer
   }
 
   const startTimer = () => {
     if (currentExercise) {
-      setTimer(currentExercise.sets?.[currentSetIndex]?.rest_time || 180); // Set the timer to the rest time of the current set
-      setIsTimerRunning(true);
+      if (isTimerRunning) {
+        setIsTimerRunning(false);
+        setTimer(0);
+        handleTimerEnd();
+      } else {
+        setTimer(currentExercise.sets?.[currentSetIndex]?.rest_time || 180); // Set the timer to the rest time of the current set
+        setIsTimerRunning(true);
+      }
     }
   }
 
@@ -136,8 +142,8 @@ export default function workout() {
               <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
               <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
               <View style={containerStyles.buttonContainer}>
-              <ButtonAddSetToCurrentExercise />
-              <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan || ''}/>
+                <ButtonAddSetToCurrentExercise />
+                <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan || ''} />
               </View>
             </View>
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
@@ -145,7 +151,7 @@ export default function workout() {
         ) : null}
         <View style={containerStyles.buttonStartTimerAfterWorkoutContainer}>
           <View>
-            <ButtonPreviousExercise onPress={previousExercise}/>
+            <ButtonPreviousExercise onPress={previousExercise} />
           </View>
           <View>
             <ButtonStartTimerAfterExercise onPress={startTimer} />

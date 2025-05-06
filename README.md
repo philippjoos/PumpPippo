@@ -7,6 +7,11 @@ tbd Programmbeschreibung.
    npx expo start
    ```
 
+## update
+   ```bash
+   npx expo install expo@latest
+   ```
+
 the qr code for opening the application in the expo go app, is displayed after startup.
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
