@@ -17,7 +17,7 @@ export default function ButtonStopWorkout({ onPress, workoutPlanName }: Props) {
     const [modalVisible, setModalVisible] = useState(false);
       const [modalContent, setModalContent] = useState("");
 
-    const confirmDelete = () => {
+    const confirmStop = () => {
         onPress();
         setModalVisible(false);
       };
@@ -39,7 +39,7 @@ export default function ButtonStopWorkout({ onPress, workoutPlanName }: Props) {
         <Pressable style={buttonStyles.buttonStopWorkout} onPress={showMessage}>
             <Ionicons name="stop-circle-outline" size={24} color="white" />
         </Pressable>
-        <PopUpStopWorkout visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm stopping"} content={modalContent}/>
+        <PopUpStopWorkout visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmStop} title={"confirm stopping"} content={modalContent}/>
     </View>
   );
 }

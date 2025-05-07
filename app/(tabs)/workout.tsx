@@ -5,7 +5,7 @@ import { Text, View, } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Exercise } from '@/app/(tabs)/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useSearchParams } from 'expo-router/build/hooks';
+import { useRouter, useSearchParams } from 'expo-router/build/hooks';
 import ButtonStartTimerAfterExercise from '@/components/(buttons)/(workout)/buttonStartTimerAfterExercise';
 import ButtonNextExercise from '@/components/(buttons)/(workout)/buttonNextExercise';
 import ButtonPreviousExercise from '@/components/(buttons)/(workout)/buttonPreviousExercise';
@@ -18,35 +18,33 @@ import FileHandler from '@/utils/fileHandler';
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [workoutPlan, setWorkoutPlan] = useState<WorkoutPlan | null>(null);
-  // current exercise and set
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
-  // timer
-  const [timer, setTimer] = useState(0); // Timer state
-  const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer running state
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  // load and save workoutplan from params
+  // Parse workoutPlan from URL params once when params change
   useEffect(() => {
-    const plan = searchParams.get('workoutPlan');
-    if (plan) {
-      setWorkoutPlan(JSON.parse(plan)); // WorkoutPlan aus den Parametern parsen
-      setExercises(workoutPlan?.exercises || []); // Übungen aus dem WorkoutPlan setzen
+    const planParam = searchParams.get('workoutPlan');
+    if (planParam) {
+      const parsedPlan: WorkoutPlan = JSON.parse(planParam);
+      setWorkoutPlan(parsedPlan);
     }
   }, [searchParams]);
 
-  const saveWorkoutPlan = async () => {
+  // Sync exercises whenever workoutPlan changes
+  useEffect(() => {
     if (workoutPlan) {
-      const allWorkoutPlans = await FileHandler.getWorkoutplans();
-      const updatedPlans = allWorkoutPlans?.map((plan) =>
-        plan.name === workoutPlan.name ? workoutPlan : plan
-      ) || [];
-      await FileHandler.saveData('workoutplans', updatedPlans);
+      setExercises(workoutPlan.exercises || []);
+    } else {
+      setExercises([]);
     }
-  };
+  }, [workoutPlan]);
 
-  const currentExercise = exercises[currentExerciseIndex];
 
+  // use effect for timer
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
     if (isTimerRunning && timer > 0) {
@@ -61,11 +59,26 @@ export default function workout() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
 
+  const saveWorkoutPlan = async () => {
+    if (workoutPlan) {
+      const allWorkoutPlans = await FileHandler.getWorkoutplans();
+      const updatedPlans = allWorkoutPlans?.map((plan) =>
+        plan.name === workoutPlan.name ? workoutPlan : plan
+      ) || [];
+      await FileHandler.saveData('workoutplans', updatedPlans);
+    }
+  };
+
+  const currentExercise = exercises[currentExerciseIndex];
+
   const resetWorkout = () => {
     setCurrentExerciseIndex(0);
     setCurrentSetIndex(0);
     setTimer(0);
-    setIsTimerRunning(false); // Stop the timer
+    setIsTimerRunning(false);
+    setExercises([]);
+    setWorkoutPlan(null);
+    router.replace({ pathname: '/workout' });
   };
 
   const startTimer = () => {
