@@ -10,7 +10,6 @@ import { Exercise } from '@/app/(tabs)/exercises';
 // styles imports
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
-import { useRouter } from 'expo-router';
 
 export type WorkoutPlan = {
   name: string;
@@ -19,7 +18,6 @@ export type WorkoutPlan = {
 
   export default function WorkoutPlans() {
     const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
-    const router = useRouter();
 
     useEffect(() => {
       FileHandler.getWorkoutplans().then((loadedWorkoutPlans) => {

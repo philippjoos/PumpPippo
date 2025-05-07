@@ -9,10 +9,10 @@ import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 
 interface Props {
     onPress: () => void;
-    workoutPlan: WorkoutPlan;
+    workoutPlanName: string;
 }
 
-export default function ButtonStopWorkout({ onPress, workoutPlan }: Props) {
+export default function ButtonStopWorkout({ onPress, workoutPlanName }: Props) {
 
     const [modalVisible, setModalVisible] = useState(false);
       const [modalContent, setModalContent] = useState("");
@@ -23,7 +23,7 @@ export default function ButtonStopWorkout({ onPress, workoutPlan }: Props) {
       };
     
       const showMessage = () => {
-        if(workoutPlan !== null){
+        if(workoutPlanName !== null){
             const deleteApproveText = "Are you sure you want to stop the workout?\n";
             setModalContent(deleteApproveText);
             setModalVisible(true);

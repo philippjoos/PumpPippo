@@ -12,28 +12,38 @@ import ButtonPreviousExercise from '@/components/(buttons)/(workout)/buttonPrevi
 import ButtonEditCurrentSet from '@/components/(buttons)/(workout)/buttonEditCurrentSet';
 import ButtonAddSetToCurrentExercise from '@/components/(buttons)/(workout)/buttonAddSetToCurrentExercise';
 import ButtonStopWorkout from '@/components/(buttons)/(workout)/buttonStopWorkout';
+import { WorkoutPlan } from './workoutplan';
+import FileHandler from '@/utils/fileHandler';
 
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const searchParams = useSearchParams();
-  const workoutPlan = searchParams.get('workoutPlan');
-
+  const [workoutPlan, setWorkoutPlan] = useState<WorkoutPlan | null>(null);
   // current exercise and set
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
-
   // timer
   const [timer, setTimer] = useState(0); // Timer state
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer running state
 
-
+  // load and save workoutplan from params
   useEffect(() => {
-    if (workoutPlan) {
-      const parsedWorkoutPlan = JSON.parse(workoutPlan as string);
-      setExercises(parsedWorkoutPlan.exercises);
-      resetWorkout();
+    const plan = searchParams.get('workoutPlan');
+    if (plan) {
+      setWorkoutPlan(JSON.parse(plan)); // WorkoutPlan aus den Parametern parsen
+      setExercises(workoutPlan?.exercises || []); // Übungen aus dem WorkoutPlan setzen
     }
-  }, [workoutPlan]);
+  }, [searchParams]);
+
+  const saveWorkoutPlan = async () => {
+    if (workoutPlan) {
+      const allWorkoutPlans = await FileHandler.getWorkoutplans();
+      const updatedPlans = allWorkoutPlans?.map((plan) =>
+        plan.name === workoutPlan.name ? workoutPlan : plan
+      ) || [];
+      await FileHandler.saveData('workoutplans', updatedPlans);
+    }
+  };
 
   const currentExercise = exercises[currentExerciseIndex];
 
@@ -56,7 +66,7 @@ export default function workout() {
     setCurrentSetIndex(0);
     setTimer(0);
     setIsTimerRunning(false); // Stop the timer
-  }
+  };
 
   const startTimer = () => {
     if (currentExercise) {
@@ -69,7 +79,7 @@ export default function workout() {
         setIsTimerRunning(true);
       }
     }
-  }
+  };
 
   const handleTimerEnd = () => {
     if (currentExercise && currentSetIndex < (currentExercise.sets?.length ?? 0) - 1) {
@@ -145,7 +155,7 @@ export default function workout() {
               <Text style={textStyles.content}>Rest Time: {currentExercise.sets?.[currentSetIndex]?.rest_time || 'N/A'} seconds</Text>
               <View style={containerStyles.buttonContainer}>
                 <ButtonAddSetToCurrentExercise />
-                <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan || ''} />
+                <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan?.name || ""} />
               </View>
             </View>
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
@@ -164,7 +174,7 @@ export default function workout() {
           </View>
         </View>
       </View>
-      <ButtonStopWorkout onPress={resetWorkout} workoutPlan={JSON.parse(workoutPlan as string)}/>
+      <ButtonStopWorkout onPress={resetWorkout} workoutPlanName={workoutPlan?.name || ''}/>
     </View>
   );
 }

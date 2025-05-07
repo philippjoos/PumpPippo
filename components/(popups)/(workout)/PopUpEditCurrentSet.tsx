@@ -7,33 +7,50 @@ import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
 import { useState } from "react";
+import FileHandler from "@/utils/fileHandler";
 
 interface PopupModalProps {
     visible: boolean;
     onClose: () => void;
-    onConfirm: (set: Set) => void; // Optional onConfirm function
+    onConfirm: (set: Set) => void;
     title: string;
     currentSet?: Set;
+    workoutplanName: string; // Hinzufügen
+    currentExerciseIndex: number; // Hinzufügen
 }
 
-export default function PopUpEditCurrentSet({ visible, onClose, onConfirm, title, currentSet }: PopupModalProps) {
+export default function PopUpEditCurrentSet({ visible, onClose, title, currentSet, workoutplanName, currentExerciseIndex }: PopupModalProps) {
     const [set, setSet] = useState<Set>({ setCount: 1, reps: 0, weight: 0, rest_time: 0 }); // State to manage the set data
 
     useEffect(() => {
         if (currentSet) {
-            setSet((prevSet) => ({
-                ...prevSet,
-                setCount: currentSet.setCount, // Übernehme den setCount aus currentSet
-            }));
+            setSet(currentSet); // Setze den gesamten aktuellen Set-Wert
         }
     }, [currentSet]);
 
-    const handleConfirm = () => {
-        if (onConfirm) {
-            onConfirm(set); // Call the onConfirm function with the set data
+    const handleConfirm = async (updatedSet: Set) => {
+        const allWorkoutplans = await FileHandler.getWorkoutplans();
+        const workoutplan = allWorkoutplans?.find((plan) => plan.name === workoutplanName);
+    
+        if (workoutplan) {
+            const exerciseSets = workoutplan.exercises[currentExerciseIndex].sets || [];
+            const setIndex = exerciseSets.findIndex((s) => s.setCount === updatedSet.setCount);
+    
+            if (setIndex !== -1) {
+                exerciseSets[setIndex] = updatedSet;
+                workoutplan.exercises[currentExerciseIndex].sets = exerciseSets;
+                if (allWorkoutplans) {
+                    await FileHandler.saveData('workoutplans', allWorkoutplans);
+                }
+    
+                // Lade den aktualisierten Workoutplan in den State
+                const updatedWorkoutplans = await FileHandler.getWorkoutplans();
+                console.log('Updated workout plans:', updatedWorkoutplans);
+            }
         }
-        onClose(); // Close the modal after confirming
-    }
+    
+        onClose();
+    };
 
     const editSet = (field: keyof Set, value: string) => {
         setSet((prevSet) => ({
@@ -60,7 +77,7 @@ export default function PopUpEditCurrentSet({ visible, onClose, onConfirm, title
                         </View>
                     </View>
                     <View style={containerStyles.buttonContainer}>
-                        <Button title="Safe" onPress={handleConfirm} color={'#6D28D9'} />
+                        <Button title="Safe" onPress={() => handleConfirm(set)} color={'#6D28D9'} />
                         <Button title="Close" onPress={onClose} color={'#6D28D9'} />
                     </View>
                 </View>

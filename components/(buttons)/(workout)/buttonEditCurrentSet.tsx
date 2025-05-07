@@ -44,7 +44,7 @@ export default function ButtonEditCurrentSet({ set, currentExerciseIndex, workou
             <Pressable style={buttonStyles.buttonEditCurrentSet} onPress={() => setModalVisible(true)}>
                 <Ionicons name="create-outline" size={24} color="white" />
             </Pressable>
-            <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleConfirm} title={"Edit Set"} currentSet={set} />
+            <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleConfirm} title={"Edit Set"} currentSet={set} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>
         </View>
     );
 }
