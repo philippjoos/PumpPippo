@@ -11,6 +11,7 @@ import ButtonNextExercise from '@/components/(buttons)/(workout)/buttonNextExerc
 import ButtonPreviousExercise from '@/components/(buttons)/(workout)/buttonPreviousExercise';
 import ButtonEditCurrentSet from '@/components/(buttons)/(workout)/buttonEditCurrentSet';
 import ButtonAddSetToCurrentExercise from '@/components/(buttons)/(workout)/buttonAddSetToCurrentExercise';
+import ButtonStopWorkout from '@/components/(buttons)/(workout)/buttonStopWorkout';
 
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -141,6 +142,7 @@ export default function workout() {
               </Text>
               <Text style={textStyles.content}>Reps: {currentExercise.sets?.[currentSetIndex]?.reps || 'N/A'}</Text>
               <Text style={textStyles.content}>Weight: {currentExercise.sets?.[currentSetIndex]?.weight || 'N/A'}</Text>
+              <Text style={textStyles.content}>Rest Time: {currentExercise.sets?.[currentSetIndex]?.rest_time || 'N/A'} seconds</Text>
               <View style={containerStyles.buttonContainer}>
                 <ButtonAddSetToCurrentExercise />
                 <ButtonEditCurrentSet set={currentExercise.sets?.[currentSetIndex]} currentExerciseIndex={currentSetIndex} workoutplanName={workoutPlan || ''} />
@@ -149,7 +151,8 @@ export default function workout() {
             <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
           </>
         ) : null}
-        <View style={containerStyles.buttonStartTimerAfterWorkoutContainer}>
+        
+        <View style={containerStyles.buttonNavigateExercise}>
           <View>
             <ButtonPreviousExercise onPress={previousExercise} />
           </View>
@@ -161,6 +164,7 @@ export default function workout() {
           </View>
         </View>
       </View>
+      <ButtonStopWorkout onPress={resetWorkout} workoutPlan={JSON.parse(workoutPlan as string)}/>
     </View>
   );
 }

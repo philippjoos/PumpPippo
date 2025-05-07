@@ -1,3 +1,4 @@
+import ButtonStopWorkout from "@/components/(buttons)/(workout)/buttonStopWorkout";
 import { StyleSheet } from "react-native";
 
 const buttonStyles = StyleSheet.create({
@@ -23,7 +24,7 @@ const buttonStyles = StyleSheet.create({
     borderRadius: 10,
     width: '100%',
     height: '120%',
-    alignItems: 'baseline',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: '#6D28D9',
@@ -43,19 +44,17 @@ const buttonStyles = StyleSheet.create({
   buttonStartTimerAfterWorkout: {
     backgroundColor: '#6D28D9',
     borderRadius: 50,
-    position: 'absolute',
-    bottom: 10,
     alignItems: 'center',
     justifyContent: 'center', // Center the content inside the button
     width: 60, // Breite des Buttons
     height: 60, // Höhe des Buttons
     elevation: 5,
+    marginLeft: 15,
+    marginRight: 15,
   },
   buttonNavigateExercise: {
     backgroundColor: '#6D28D9',
     borderRadius: 40,
-    position: 'absolute',
-    bottom: 10,
     alignItems: 'center',
     justifyContent: 'center', // Center the content inside the button
     width: 45, // Breite des Buttons
@@ -71,6 +70,18 @@ const buttonStyles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#6D28D9',
   },
+  buttonStopWorkout: {
+    backgroundColor: '#6D28D9',
+    borderRadius: 50,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center', // Center the content inside the button
+    bottom: 10, // Abstand vom unteren Rand
+    right: 10, // Abstand vom rechten Rand
+    width: 60, // Breite des Buttons
+    height: 60, // Höhe des Buttons
+    elevation: 5, // Schatten für ein besseres visuelles Feedback
+  }
 });
 
 export default buttonStyles;

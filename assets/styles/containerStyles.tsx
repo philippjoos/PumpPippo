@@ -5,7 +5,7 @@ const containerStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    padding: 10,
+    padding: 5,
     backgroundColor: '#1F1F1F',
   },
   exerciseContainer: {
@@ -22,16 +22,15 @@ const containerStyles = StyleSheet.create({
   currentExerciseContainer: {
     flexDirection: 'column',
     flex: 1,
-    padding: 10,
+    padding: 5,
     backgroundColor: '#1F1F1F',
     borderWidth: 1,
     borderColor: '#6D28D9',
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '25%',
-    paddingVertical: 10,
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
   buttonSelectExerciseToAddContainer: {
     marginBottom: 10,
@@ -61,14 +60,14 @@ const containerStyles = StyleSheet.create({
     bottom: '0.5%',
     right: '0.5%',
   },
-  buttonStartTimerAfterWorkoutContainer: {
+  buttonNavigateExercise: {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    position: "absolute", // Positioniere den Button absolut
-    bottom: 10, // Abstand vom unteren Rand
-    alignSelf: "center", // Zentriere den Button horizontal
-    width: '30%',
+    position: "absolute",
+    bottom: 5,
+    alignSelf: 'center',
+    
   },
   // Styles from buttonCreateWorkoutplan.tsx
   createButtonContainer: {

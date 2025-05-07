@@ -9,10 +9,10 @@ const textStyles = StyleSheet.create({
     },
     text: {
         color: '#FFFFFF',
-        fontSize: 30,
+        fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     textBoxLabel: {
         flex: 1,
