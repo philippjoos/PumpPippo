@@ -1,4 +1,4 @@
-import { Exercise, Sets } from "@/app/(tabs)/exercises";
+import { Exercise, Set } from "@/app/(tabs)/exercises";
 import React, { useState } from "react";
 import { Modal, View, Text, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
@@ -19,7 +19,7 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
     const [exerciseName, setExerciseName] = useState("");
     const [muscle_group, setMuscleGroup] = useState("");
     const [equipment, setEquipment] = useState("");
-    const [sets, setSets] = useState<Sets[]>([]);
+    const [sets, setSets] = useState<Set[]>([]);
 
     const addExercise = () => {
         if (exerciseName == "" || muscle_group == "" || equipment == "") {
