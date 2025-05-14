@@ -8,12 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
 
-type Props = {
-  label: string;
-  onWorkoutPlanAdded: (workoutPlan: WorkoutPlan) => void; 
-};
 
-export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: Props) {
+export default function ButtonCreateWorkoutplan() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleCreateWorkoutPlan = async (workoutPlan: WorkoutPlan) => {
@@ -26,12 +22,12 @@ export default function ButtonCreateWorkoutplan({ label, onWorkoutPlanAdded }: P
       } else {
         const updatedWorkoutPlans = [...loadedWorkoutPlans, workoutPlan];
         await FileHandler.saveData('workoutplans', updatedWorkoutPlans);
-        onWorkoutPlanAdded(workoutPlan); // Notify parent component
+        //onWorkoutPlanAdded(workoutPlan); // Notify parent component
       }
     } else {
       const updatedWorkoutPlans = [workoutPlan];
       await FileHandler.saveData('workoutplans', updatedWorkoutPlans);
-      onWorkoutPlanAdded(workoutPlan); // Notify parent component
+      //onWorkoutPlanAdded(workoutPlan); // Notify parent component
     }
   };
 

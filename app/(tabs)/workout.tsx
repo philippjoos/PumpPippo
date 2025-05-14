@@ -2,8 +2,8 @@ import containerStyles from '@/assets/styles/containerStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
 import textStyles from '@/assets/styles/textStyles';
 import { Text, View, } from 'react-native';
-import { useState, useEffect } from 'react';
-import { Exercise } from '@/app/(tabs)/exercises';
+import { useState, useEffect, useRef } from 'react';
+import { Exercise, Set } from '@/app/(tabs)/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRouter, useSearchParams } from 'expo-router/build/hooks';
 import ButtonStartTimerAfterExercise from '@/components/(buttons)/(workout)/buttonStartTimerAfterExercise';
@@ -21,6 +21,7 @@ export default function workout() {
   const router = useRouter();
   const [workoutPlan, setWorkoutPlan] = useState<WorkoutPlan | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+  const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -32,18 +33,42 @@ export default function workout() {
     if (planParam) {
       const parsedPlan: WorkoutPlan = JSON.parse(planParam);
       setWorkoutPlan(parsedPlan);
+      console.log('Parsed workout plan:', parsedPlan);
     }
   }, [searchParams]);
 
-  // Sync exercises whenever workoutPlan changes
+
+  const workoutPlanRef = useRef(workoutPlan);
+
   useEffect(() => {
+    workoutPlanRef.current = workoutPlan;
     if (workoutPlan) {
       setExercises(workoutPlan.exercises || []);
-    } else {
-      setExercises([]);
     }
   }, [workoutPlan]);
 
+  // effect to load workout new when listener triggered
+  useEffect(() => {
+    const handleStorageUpdate = async (updatedPlans: WorkoutPlan[]) => {
+      const updatedPlan = updatedPlans.find((p) => p.name === workoutPlanRef.current?.name);
+      if (updatedPlan) {
+        setWorkoutPlan(updatedPlan);
+      }
+      console.log('workoutplan updated:', updatedPlan);
+    };
+
+    FileHandler.addStorageListener('workoutplans', handleStorageUpdate);
+
+    return () => {
+      FileHandler.removeStorageListener('workoutplans', handleStorageUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (exercises.length > 0) {
+      setCurrentExercise(exercises[currentExerciseIndex] || null);
+    }
+  }, [exercises, currentExerciseIndex]);
 
   // use effect for timer
   useEffect(() => {
@@ -60,9 +85,6 @@ export default function workout() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
 
-  const currentExercise = exercises[currentExerciseIndex];
-
-  
   const resetWorkout = () => {
     setCurrentExerciseIndex(0);
     setCurrentSetIndex(0);
@@ -118,8 +140,6 @@ export default function workout() {
     }
   }
 
-  const currentSet = exercises[currentExerciseIndex]?.sets?.[currentSetIndex];
-
   return (
     <View style={[containerStyles.container, { flex: 1 }]}>
       <View style={containerStyles.container}>
@@ -150,20 +170,20 @@ export default function workout() {
       <View style={[containerStyles.currentExerciseContainer, { flex: 1 }]}>
         {/* Container for current executed exercise */}
         <Text style={textStyles.title}>current exercise:</Text>
-        {currentSet && (
-          <>            
+        {exercises.length > 0 && currentExercise && currentExercise.sets && (
+          <>
             <View style={containerStyles.exerciseContainer}>
-              <Text style={textStyles.exerciseName}>{exercises[currentExerciseIndex].name}</Text>
+              <Text style={textStyles.exerciseName}>{currentExercise.name}</Text>
               <Text style={textStyles.content}>
-                Set {currentSetIndex + 1} of {exercises[currentExerciseIndex].sets?.length}
+                Set {currentSetIndex + 1} of {currentExercise.sets?.length}
               </Text>
-              <Text style={textStyles.content}>Reps: {currentSet.reps}</Text>
-              <Text style={textStyles.content}>Weight: {currentSet.weight}</Text>
-              <Text style={textStyles.content}>Rest: {currentSet.rest_time}s</Text>
+              <Text style={textStyles.content}>Reps: {currentExercise.sets[currentSetIndex].reps}</Text>
+              <Text style={textStyles.content}>Weight: {currentExercise.sets[currentSetIndex].weight}</Text>
+              <Text style={textStyles.content}>Rest: {currentExercise.sets[currentSetIndex].rest_time}s</Text>
               <View style={containerStyles.buttonContainer}>
                 <ButtonAddSetToCurrentExercise />
                 <ButtonEditCurrentSet
-                  set={currentSet}
+                  set={currentExercise.sets[currentSetIndex]}
                   currentExerciseIndex={currentExerciseIndex}
                   workoutplanName={workoutPlan?.name || ''}
                 />

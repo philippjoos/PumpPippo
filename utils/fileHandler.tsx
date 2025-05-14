@@ -1,13 +1,18 @@
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Exercise } from '@/app/(tabs)/exercises';
+import EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter';
 
 class FileHandler {
+  //EventListener für AsyncStorage
+  static storageEmitter = new EventEmitter();
+
   // Speichert ein JSON-Objekt in AsyncStorage
   static async saveData(key: string, jsonObject: Record<string, any>): Promise<void> {
     try {
       const jsonValue = JSON.stringify(jsonObject);
       await AsyncStorage.setItem(key, jsonValue);
+      this.storageEmitter.emit(key, jsonObject); // Emit event after saving
     } catch (error) {
       console.error('Fehler beim Speichern der JSON-Daten:', error);
     }
@@ -32,6 +37,14 @@ class FileHandler {
       console.error('Fehler beim Abrufen der JSON-Daten:', error);
       return null;
     }
+  }
+
+  static addStorageListener(key: string, callback: (data: any) => void): void {
+    this.storageEmitter.addListener(key, callback);
+  }
+
+  static removeStorageListener(key: string, callback: (data: any) => void): void {
+    this.storageEmitter.removeAllListeners(key);
   }
 }
 

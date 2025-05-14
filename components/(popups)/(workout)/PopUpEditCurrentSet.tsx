@@ -22,19 +22,20 @@ export default function PopUpEditCurrentSet({ visible, onClose, title, currentSe
     const [weight, setWeight] = useState<string>('');
     const [reps, setReps] = useState<string>('');
     const [rest_time, setRestTime] = useState<string>('');
+    
     const editSet = async () => {
         const workoutPlans = await FileHandler.getWorkoutplans();
         if (workoutPlans) {
             const workoutPlan = workoutPlans.find((plan) => plan.name === workoutplanName);
             if (workoutPlan) {
-                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount]) {
-                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount].weight = parseInt(weight);
+                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount-1]) {
+                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount-1].weight = parseInt(weight);
                 }
-                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount]) {
-                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount].reps = parseInt(reps);
+                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount-1]) {
+                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount-1].reps = parseInt(reps);
                 }
-                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount]) {
-                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount].rest_time = parseInt(rest_time);
+                if (workoutPlan.exercises?.[currentExerciseIndex]?.sets?.[currentSet.setCount-1]) {
+                    workoutPlan.exercises[currentExerciseIndex].sets[currentSet.setCount-1].rest_time = parseInt(rest_time);
                 }
                 await FileHandler.saveData('workoutplans', workoutPlans);
             }
