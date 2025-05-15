@@ -20,7 +20,7 @@ interface Props {
 
     return (
         <View style={[containerStyles.buttonContainer]}>
-            <Pressable style={buttonStyles.buttonEditCurrentSet} onPress={() => setModalVisible(true)}>
+            <Pressable style={buttonStyles.buttonModify} onPress={() => setModalVisible(true)}>
                 <Ionicons name="create-outline" size={24} color="white" />
             </Pressable>
             <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} title={"Edit Set"} currentSet={set} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>

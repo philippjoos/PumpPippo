@@ -22,7 +22,6 @@ const buttonStyles = StyleSheet.create({
   },
   buttonWorkoutPlans: {
     borderRadius: 10,
-    width: '100%',
     height: '120%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -63,12 +62,21 @@ const buttonStyles = StyleSheet.create({
   },
   buttonEditCurrentSet: {
     borderRadius: 10,
-    width: '100%',
     height: '120%',
     alignItems: 'baseline',
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: '#6D28D9',
+    padding: 2,
+  },
+  buttonModify: {
+    borderRadius: 10,
+    height: '120%',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#6D28D9',
+    padding: 2,
   },
   buttonStopWorkout: {
     backgroundColor: '#6D28D9',

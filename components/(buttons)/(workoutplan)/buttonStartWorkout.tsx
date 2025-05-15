@@ -23,7 +23,7 @@ export default function ButtonStartWorkout({ label, workoutplan }: Props) {
   
   return (
     <View style={[containerStyles.buttonContainer]}>
-      <Pressable style={buttonStyles.buttonWorkoutPlans} onPress={handleStartWorkout}>
+      <Pressable style={buttonStyles.buttonModify} onPress={handleStartWorkout}>
         <Text style={textStyles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>

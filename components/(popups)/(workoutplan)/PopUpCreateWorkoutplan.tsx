@@ -20,13 +20,13 @@ interface PopupModalProps {
 export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, title }: PopupModalProps) {
 
   const [workoutplanName, setWorkoutplanName] = useState("");
-  const [selectExerciseVisible, setSelectExerciseVisible] = useState(false); // State to manage the visibility of the exercise selection popup
-  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]); // State to manage the selected exercises
+  const [selectExerciseVisible, setSelectExerciseVisible] = useState(false);
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const [sets, setSets] = useState<{ [exerciseIndex: number]: Set[] }>({});
   
   const handleExerciseSelected = (exercise: Exercise) => {
-    setSelectedExercises([...selectedExercises, exercise]); // Add the exercise name to the list
-    setSelectExerciseVisible(false); // Close the exercise selection popup
+    setSelectedExercises([...selectedExercises, exercise]);
+    setSelectExerciseVisible(false);
   };
 
 
@@ -35,17 +35,17 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
       name: workoutplanName,
       exercises: selectedExercises.map((exercise, exerciseIndex) => ({
         name: exercise.name,
-        muscle_group: exercise.muscle_group, // Include the required muscle_group property
-        sets: sets[exerciseIndex] || [], // Get the sets for the current exercise
-        equipment: exercise.equipment, // Include the required equipment property
+        muscle_group: exercise.muscle_group,
+        sets: sets[exerciseIndex],
+        equipment: exercise.equipment,
       })),
     };
   };
 
   const handleCreate = () => {
     const workoutPlan = buildWorkoutplan();
-    onConfirm(workoutPlan); // Call the onConfirm function with the workout plan name
-    onClosing(); // Close the modal after creating the workout plan
+    onConfirm(workoutPlan);
+    onClosing();
     
   }
 
@@ -134,7 +134,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
       </View>
     ))}
     <View style={containerStyles.gridContainer}>
-      <View style={containerStyles.rowContainer}>
+      <View style={{alignItems: "center"}}>
         <Button title="Add Set" onPress={() => onAddSet(exerciseIndex)} color={'#6D28D9'} />
       </View>
     </View>

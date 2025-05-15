@@ -84,7 +84,7 @@ export default function WorkoutPlans() {
         }
       </ScrollView>
       <View style={containerStyles.buttonCreateContainer}>
-        <ButtonCreateWorkoutplan label='+' onWorkoutPlanAdded={createWorkoutPlan} />
+        <ButtonCreateWorkoutplan/>
       </View>
     </View>
   );
