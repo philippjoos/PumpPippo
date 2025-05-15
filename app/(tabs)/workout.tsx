@@ -149,6 +149,7 @@ export default function workout() {
             <Text style={textStyles.text}>currently no workoutplan selected!</Text>
           ) : (
             <>
+            <Text style={textStyles.text}>{workoutPlan.name}</Text>
               {exercises.map((exercise) => (
                 <View key={exercise.name} style={containerStyles.exerciseContainer}>
                   <Text style={textStyles.exerciseName}>{exercise.name}</Text>
