@@ -22,7 +22,7 @@ export type Exercise = {
   name: string;
   muscle_group: string;
   equipment?: string;
-  sets?: Set[]; 
+  sets: Set[];
 };
 
 export default function exercises() {
@@ -39,9 +39,9 @@ export default function exercises() {
             "muscle_group": "Brust",
             "equipment": "Langhantel, Bank",
             sets: [
-              {count: 1, reps: 10, weight: 60, rest_time: 180},
-              {count: 2, reps: 8, weight: 70, rest_time: 180},
-              {count: 3, reps: 6, weight: 80, rest_time: 180},
+              { count: 1, reps: 10, weight: 60, rest_time: 180 },
+              { count: 2, reps: 8, weight: 70, rest_time: 180 },
+              { count: 3, reps: 6, weight: 80, rest_time: 180 },
             ],
           },
         ]);
@@ -55,7 +55,7 @@ export default function exercises() {
 
   const deleteExercise = (workoutplanName: string) => {
     FileHandler.getExercises().then((exercises) => {
-      if(exercises){
+      if (exercises) {
         const newExercises = exercises.filter((exercise) => exercise.name !== workoutplanName);
         FileHandler.saveData('exercises', newExercises);
         setExercises(newExercises);
@@ -72,12 +72,14 @@ export default function exercises() {
               <Text style={textStyles.exerciseName}>{exercise.name}</Text>
               <Text style={textStyles.content}>Muscle Group: {exercise.muscle_group}</Text>
               <Text style={textStyles.content}>Equipment: {exercise.equipment}</Text>
-              <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteExercise} />
+              <View style={containerStyles.buttonContainer}>
+                <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteExercise} />
+              </View>
             </View>
           ))}
       </ScrollView>
       <View style={containerStyles.buttonCreateContainer}>
-        <ButtonCreateExercise label="+"  onExerciseCreate={handleExerciseAdded}/>
+        <ButtonCreateExercise label="+" onExerciseCreate={handleExerciseAdded} />
       </View>
     </View>
   );

@@ -36,7 +36,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
       exercises: selectedExercises.map((exercise, exerciseIndex) => ({
         name: exercise.name,
         muscle_group: exercise.muscle_group, // Include the required muscle_group property
-        sets: sets[exerciseIndex] || [], // Get the sets for the current exercise
+        sets: sets[exerciseIndex], // Get the sets for the current exercise
         equipment: exercise.equipment, // Include the required equipment property
       })),
     };
