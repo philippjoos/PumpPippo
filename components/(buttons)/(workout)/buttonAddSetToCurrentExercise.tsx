@@ -17,7 +17,7 @@ export default function ButtonAddSetToCurrentExercise({currentExerciseIndex, wor
 
     return (
         <View style={[containerStyles.buttonContainer]}>
-            <Pressable style={buttonStyles.buttonEditCurrentSet} onPress={() => setModalVisible(true)}>
+            <Pressable style={buttonStyles.buttonModify} onPress={() => setModalVisible(true)}>
                 <Ionicons name="add-circle-outline" size={24} color="white" />
             </Pressable>
         <PopUpAddSetToCurrentExercise visible={modalVisible} onClose={() => setModalVisible(false)} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>

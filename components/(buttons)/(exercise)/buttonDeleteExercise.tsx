@@ -31,7 +31,7 @@ export default function ButtonDeleteExercise({ label, selectedExercise, onDelete
 
     return (
       <View style={[containerStyles.buttonContainer]}>
-        <Pressable style={buttonStyles.buttonExercises} onPress={showMessage}>
+        <Pressable style={buttonStyles.buttonModify} onPress={showMessage}>
           <Text style={textStyles.buttonLabel}>{label}</Text>
         </Pressable>
         <PopUpDeleteExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmDelete} title={"confirm deleting"} content={modalContent} />

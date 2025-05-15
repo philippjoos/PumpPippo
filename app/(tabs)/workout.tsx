@@ -181,7 +181,7 @@ export default function workout() {
               <Text style={textStyles.content}>Weight: {currentExercise.sets[currentSetIndex].weight}</Text>
               <Text style={textStyles.content}>Rest: {currentExercise.sets[currentSetIndex].rest_time}s</Text>
               <View style={containerStyles.buttonContainer}>
-                <ButtonAddSetToCurrentExercise workoutplanName={workoutPlan.name} currentExerciseIndex={currentExerciseIndex}/>
+                <ButtonAddSetToCurrentExercise workoutplanName={workoutPlan?.name || ''} currentExerciseIndex={currentExerciseIndex}/>
                 <ButtonEditCurrentSet
                   set={currentExercise.sets[currentSetIndex]}
                   currentExerciseIndex={currentExerciseIndex}
