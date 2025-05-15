@@ -1,14 +1,18 @@
 import { View, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import PopUpEditCurrentSet from '@/components/(popups)/(workout)/PopUpEditCurrentSet';
+import PopUpAddSetToCurrentExercise from '@/components/(popups)/(workout)/PopUpAddSetToCurrentExercise';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
 import containerStyles from '@/assets/styles/containerStyles';
 
+interface Props {
+    currentExerciseIndex: number;
+    workoutplanName: string;
+  }
 
-export default function ButtonAddSetToCurrentExercise() {
+export default function ButtonAddSetToCurrentExercise({currentExerciseIndex, workoutplanName}: Props) {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
@@ -16,7 +20,7 @@ export default function ButtonAddSetToCurrentExercise() {
             <Pressable style={buttonStyles.buttonEditCurrentSet} onPress={() => setModalVisible(true)}>
                 <Ionicons name="add-circle-outline" size={24} color="white" />
             </Pressable>
-
+        <PopUpAddSetToCurrentExercise visible={modalVisible} onClose={() => setModalVisible(false)} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>
         </View>
     );
 }

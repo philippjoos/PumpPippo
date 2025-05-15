@@ -17,7 +17,7 @@ import FileHandler from '@/utils/fileHandler';
 
 export default function workout() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const searchParams = useSearchParams();
+  const param = useSearchParams().get('workoutPlan');
   const router = useRouter();
   const [workoutPlan, setWorkoutPlan] = useState<WorkoutPlan | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -29,13 +29,12 @@ export default function workout() {
 
   // Parse workoutPlan from URL params once when params change
   useEffect(() => {
-    const planParam = searchParams.get('workoutPlan');
-    if (planParam) {
-      const parsedPlan: WorkoutPlan = JSON.parse(planParam);
+    if (param) {
+      const parsedPlan: WorkoutPlan = JSON.parse(param);
       setWorkoutPlan(parsedPlan);
       console.log('Parsed workout plan:', parsedPlan);
     }
-  }, [searchParams]);
+  }, [param]);
 
 
   const workoutPlanRef = useRef(workoutPlan);
@@ -84,6 +83,7 @@ export default function workout() {
     }
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
+
 
   const resetWorkout = () => {
     setCurrentExerciseIndex(0);
@@ -181,7 +181,7 @@ export default function workout() {
               <Text style={textStyles.content}>Weight: {currentExercise.sets[currentSetIndex].weight}</Text>
               <Text style={textStyles.content}>Rest: {currentExercise.sets[currentSetIndex].rest_time}s</Text>
               <View style={containerStyles.buttonContainer}>
-                <ButtonAddSetToCurrentExercise />
+                <ButtonAddSetToCurrentExercise workoutplanName={workoutPlan.name} currentExerciseIndex={currentExerciseIndex}/>
                 <ButtonEditCurrentSet
                   set={currentExercise.sets[currentSetIndex]}
                   currentExerciseIndex={currentExerciseIndex}
