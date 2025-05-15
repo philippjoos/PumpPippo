@@ -33,7 +33,7 @@ export default function PopUpWorkoutInfo({ visible, onClose, title, exercises }:
                       <Text style={textStyles.title}>Set {set.setCount}:      </Text>
                       <Text style={textStyles.content}>Reps: {set.reps},      </Text>
                       <Text style={textStyles.content}>Weight: {set.weight},      </Text>
-                      <Text style={textStyles.content}>Rest Time: {set.rest_time} seconds</Text>
+                      <Text style={textStyles.content}>Rest: {set.rest_time} s</Text>
                     </View>
                   ))}
                   <Text style={textStyles.content}></Text>

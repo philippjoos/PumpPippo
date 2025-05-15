@@ -19,6 +19,19 @@ const containerStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#6D28D9',
   },
+  selectExerciseContainer: {
+    flexDirection: 'column',
+    backgroundColor: '#1F1F1F',
+    marginBottom: 10,
+    borderRadius: 10,
+    elevation: 3,
+    alignItems: 'center',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#6D28D9',
+    height: '80%',
+    width: '99%',
+  },
   currentExerciseContainer: {
     flexDirection: 'column',
     flex: 1,
@@ -99,8 +112,9 @@ const containerStyles = StyleSheet.create({
   },
   gridContainer: {
     flexDirection: "column",
-    gap: 15, // Abstand zwischen den Zeilen
+    gap: 15,
     marginVertical: 20,
+    width: "100%",
   },
   rowContainer: {
     flexDirection: "row",
