@@ -28,6 +28,7 @@ export type Exercise = {
 export default function exercises() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
 
+
   useEffect(() => {
     FileHandler.getExercises().then((loadedExercises) => {
       console.log(loadedExercises);
@@ -104,12 +105,24 @@ export default function exercises() {
     setExercises((prevExercises) => [...prevExercises, newExercise]);
   };
 
-  const deleteExercise = (workoutplanName: string) => {
+  const deleteExercise = (exerciseName: string) => {
     FileHandler.getExercises().then((exercises) => {
       if (exercises) {
-        const newExercises = exercises.filter((exercise) => exercise.name !== workoutplanName);
+        const newExercises = exercises.filter((exercise) => exercise.name !== exerciseName);
         FileHandler.saveData('exercises', newExercises);
         setExercises(newExercises);
+      }
+    });
+
+    FileHandler.getWorkoutplans().then((workoutPlans) => {
+      if (workoutPlans) {
+        const updatedPlans = workoutPlans.map((plan: any) => ({
+          ...plan,
+          exercises: Array.isArray(plan.exercises)
+            ? plan.exercises.filter((ex: any) => ex.name !== exerciseName)
+            : plan.exercises,
+        }));
+        FileHandler.saveData('workoutplans', updatedPlans);
       }
     });
   };
@@ -124,7 +137,7 @@ export default function exercises() {
               <Text style={textStyles.content}>Muscle Group: {exercise.muscle_group}</Text>
               <Text style={textStyles.content}>Equipment: {exercise.equipment}</Text>
               <View style={containerStyles.buttonContainer}>
-                <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteExercise} />
+                <ButtonDeleteExercise label="Delete" selectedExercise={exercise.name} onDelete={deleteExercise}/>
               </View>
             </View>
           ))}

@@ -55,20 +55,8 @@ export default function WorkoutPlans() {
     });
   };
 
-  // Funktion zum Erstellen eines neuen Workout-Plans
-  const createWorkoutPlan = (newWorkoutPlan: WorkoutPlan) => {
-    FileHandler.getWorkoutplans().then((plans) => {
-      if (plans) {
-        const updatedPlans = [...plans, newWorkoutPlan];
-        console.log('Updated plans after create:', updatedPlans);
-        FileHandler.saveData('workoutplans', updatedPlans);
-      }
-    });
-  };
-
   return (
     <View style={containerStyles.container}>
-      <Text style={textStyles.text}>Your Workout Plans</Text>
       <ScrollView style={containerStyles.container}>
         {
           workoutPlans.map((trainingsplan) => (
@@ -84,7 +72,7 @@ export default function WorkoutPlans() {
         }
       </ScrollView>
       <View style={containerStyles.buttonCreateContainer}>
-        <ButtonCreateWorkoutplan/>
+        <ButtonCreateWorkoutplan />
       </View>
     </View>
   );

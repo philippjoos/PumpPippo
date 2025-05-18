@@ -11,9 +11,11 @@ interface PopupModalProps {
   onConfirm: () => void;
   title: string;
   content: string;
+  exercise: string;
 }
 
 export default function PopUpDeleteExercise({ visible, onClose, onConfirm, title, content }: PopupModalProps) {
+
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={defaultStyles.modalBackground}>

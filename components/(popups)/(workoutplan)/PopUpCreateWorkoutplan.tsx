@@ -43,10 +43,13 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   };
 
   const handleCreate = () => {
+    if(workoutplanName === "") {
+      alert("Please enter a name for the workout plan!");
+      return;
+    }
     const workoutPlan = buildWorkoutplan();
     onConfirm(workoutPlan);
     onClosing();
-    
   }
 
   const onClosing = () => {
