@@ -1,7 +1,9 @@
 import { Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image, Text, View } from 'react-native';
+import { IoHomeSharp, IoStopwatch } from 'react-icons/io5';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import React from 'react';
 
 type TabIcon = {
   size: number;
@@ -45,6 +47,7 @@ export default function TabLayout() {
           headerTitle: ({ tintColor }) => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Ionicons name="home-sharp" size={24} color={tintColor} style={{ marginRight: 8 }} />
+              <IoHomeSharp size={24} color={tintColor} style={{ marginRight: 8 }} />
               <Text style={{ color: tintColor, fontSize: 18 }}>Home</Text>
             </View>
           )
@@ -73,7 +76,7 @@ export default function TabLayout() {
         <Tabs.Screen name="workout" options={{
           title: 'Workout',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'stopwatch' : 'stopwatch'} color={color} size={24} />),
+            <IoStopwatch size={24} color={color} />),
           headerTitle: ({ tintColor }) => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Ionicons name="stopwatch" size={24} color={tintColor} style={{ marginRight: 8 }} />

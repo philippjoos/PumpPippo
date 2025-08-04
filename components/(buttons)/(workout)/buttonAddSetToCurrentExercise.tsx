@@ -1,5 +1,5 @@
 import { View, Pressable, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { IoAddCircleOutline,   } from 'react-icons/io5';
 import { useState } from 'react';
 import PopUpAddSetToCurrentExercise from '@/components/(popups)/(workout)/PopUpAddSetToCurrentExercise';
 
@@ -18,7 +18,7 @@ export default function ButtonAddSetToCurrentExercise({currentExerciseIndex, wor
     return (
         <View style={[containerStyles.buttonContainer]}>
             <Pressable style={buttonStyles.buttonModify} onPress={() => setModalVisible(true)}>
-                <Ionicons name="add-circle-outline" size={24} color="white" />
+                <IoAddCircleOutline size={24} color="white" />
             </Pressable>
         <PopUpAddSetToCurrentExercise visible={modalVisible} onClose={() => setModalVisible(false)} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>
         </View>

@@ -1,6 +1,6 @@
 import { View, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { IoCreateOutline } from 'react-icons/io5';
 import PopUpEditCurrentSet from '@/components/(popups)/(workout)/PopUpEditCurrentSet';
 import { Set } from '@/app/(tabs)/exercises';
 
@@ -21,7 +21,7 @@ interface Props {
     return (
         <View style={[containerStyles.buttonContainer]}>
             <Pressable style={buttonStyles.buttonModify} onPress={() => setModalVisible(true)}>
-                <Ionicons name="create-outline" size={24} color="white" />
+                <IoCreateOutline size={24} color="white" />
             </Pressable>
             <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} title={"Edit Set"} currentSet={set} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>
         </View>

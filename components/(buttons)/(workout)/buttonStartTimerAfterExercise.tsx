@@ -1,5 +1,5 @@
 import { View, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { IoStopwatchOutline } from 'react-icons/io5';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
@@ -13,7 +13,7 @@ export default function buttonStartTimerafterWorkout({ onPress }: Props) {
     return (
         <View>
             <Pressable style={buttonStyles.buttonStartTimerAfterWorkout} onPress={onPress}>
-                <Ionicons name="stopwatch-outline" size={24} color="white" />
+                <IoStopwatchOutline size={24} color="white" />
             </Pressable>
         </View>
     );

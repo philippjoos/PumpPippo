@@ -1,11 +1,10 @@
 import { View, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { IoStopCircleOutline } from 'react-icons/io5';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
 import PopUpStopWorkout from '@/components/(popups)/(workout)/PopUpStopWorkout';
 import { useState } from 'react';
-import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 
 interface Props {
     onPress: () => void;
@@ -37,7 +36,7 @@ export default function ButtonStopWorkout({ onPress, workoutPlanName }: Props) {
     return (
     <View>
         <Pressable style={buttonStyles.buttonStopWorkout} onPress={showMessage}>
-            <Ionicons name="stop-circle-outline" size={24} color="white" />
+            <IoStopCircleOutline size={24} color="white" />
         </Pressable>
         <PopUpStopWorkout visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={confirmStop} title={"confirm stopping"} content={modalContent}/>
     </View>

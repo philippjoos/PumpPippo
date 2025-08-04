@@ -4,6 +4,7 @@ import PopUpCreateExercise from '../../(popups)/(exercise)/PopUpCreateExercise';
 import { Exercise } from '@/app/(tabs)/exercises';
 import FileHandler from '@/utils/fileHandler';
 import { Ionicons } from '@expo/vector-icons';
+import {IoAddCircleOutline } from 'react-icons/io5';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
@@ -36,7 +37,7 @@ export default function ButtonCreateExercise({ label, onExerciseCreate }: Props)
   return (
     <View>
       <Pressable style={buttonStyles.buttonCreate} onPress={() => setModalVisible(true)}>
-        <Ionicons name="add-circle-outline" size={24} color="white" />
+        <IoAddCircleOutline size={24} color="white" />
       </Pressable>
       <PopUpCreateExercise visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateExercise} title={"Create Exercise"} />
     </View>

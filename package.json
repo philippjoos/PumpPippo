@@ -38,6 +38,7 @@
     "jest-expo": "~53.0.5",
     "react": "19.0.0",
     "react-dom": "19.0.0",
+    "react-icons": "^5.5.0",
     "react-native": "0.79.2",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "~2.24.0",

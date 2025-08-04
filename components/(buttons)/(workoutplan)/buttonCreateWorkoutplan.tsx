@@ -4,6 +4,7 @@ import PopUpCreateWorkoutplan from '@/components/(popups)/(workoutplan)/PopUpCre
 import { WorkoutPlan } from '@/app/(tabs)/workoutplan';
 import FileHandler from '@/utils/fileHandler';
 import { Ionicons } from '@expo/vector-icons';
+import { IoAddCircleOutline } from 'react-icons/io5';
 
 // styles imports
 import buttonStyles from '@/assets/styles/buttonStyles';
@@ -34,7 +35,7 @@ export default function ButtonCreateWorkoutplan() {
     return (
     <View>
       <Pressable style={buttonStyles.buttonCreate} onPress={() => setModalVisible(true)}>
-        <Ionicons name="add-circle-outline" size={24} color="white" />
+        <IoAddCircleOutline size={24} color="white" />
       </Pressable>
       <PopUpCreateWorkoutplan visible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleCreateWorkoutPlan} title={"Create Workoutplan"} />
     </View>
