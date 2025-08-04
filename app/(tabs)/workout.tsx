@@ -71,7 +71,7 @@ export default function workout() {
 
   // use effect for timer
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
+    let interval: any;
     if (isTimerRunning && timer > 0) {
       interval = setInterval(() => {
         setTimer((prev) => prev - 1);
@@ -149,7 +149,7 @@ export default function workout() {
             <Text style={textStyles.text}>currently no workoutplan selected!</Text>
           ) : (
             <>
-            <Text style={textStyles.text}>{workoutPlan.name}</Text>
+            <Text style={textStyles.text}>{workoutPlan?.name ?? ''}</Text>
               {exercises.map((exercise) => (
                 <View key={exercise.name} style={containerStyles.exerciseContainer}>
                   <Text style={textStyles.exerciseName}>{exercise.name}</Text>
