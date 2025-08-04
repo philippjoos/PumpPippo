@@ -170,7 +170,7 @@ export default function workout() {
       </View>
       <View style={[containerStyles.currentExerciseContainer, { flex: 1 }]}>
         {/* Container for current executed exercise */}
-        <Text style={textStyles.title}>current exercise:</Text>
+        <Text style={textStyles.title}>current exercise</Text>
         {exercises.length > 0 && currentExercise && currentExercise.sets && (
           <>
             <View style={containerStyles.exerciseContainer}>
