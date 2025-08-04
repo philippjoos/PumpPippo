@@ -6,8 +6,6 @@ const defaultStyles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#1F1F1F",
   },
   textbox: {

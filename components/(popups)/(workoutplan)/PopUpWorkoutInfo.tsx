@@ -6,6 +6,7 @@ import { Exercise } from "@/app/(tabs)/exercises";
 import containerStyles from '@/assets/styles/containerStyles';
 import textStyles from '@/assets/styles/textStyles';
 import defaultStyles from '@/assets/styles/defaultStyles';
+import { ScrollView } from "react-native";
 
 interface PopupModalProps {
   visible: boolean;
@@ -17,7 +18,10 @@ interface PopupModalProps {
 export default function PopUpWorkoutInfo({ visible, onClose, title, exercises }: PopupModalProps) {
   return (
     <Modal visible={visible} transparent animationType="slide">
-      <View style={defaultStyles.modalBackground}>
+      <ScrollView
+        style={defaultStyles.modalBackground}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}
+      >
         <View style={containerStyles.modalContainer}>
           <Text style={textStyles.title}>{title}</Text>
           {exercises.length == 0 ? (
@@ -28,7 +32,7 @@ export default function PopUpWorkoutInfo({ visible, onClose, title, exercises }:
               {exercises.map((exercise, index) => (
                 <View key={index}>
                   <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
-                  {exercise.sets?.map((set, index) => (
+                  {(exercise.sets ?? []).map((set, index) => (
                     <View key={index} style={containerStyles.rowContainer}>
                       <Text style={textStyles.title}>Set {set.setCount}:      </Text>
                       <Text style={textStyles.content}>Reps: {set.reps},      </Text>
@@ -44,7 +48,7 @@ export default function PopUpWorkoutInfo({ visible, onClose, title, exercises }:
 
           <Button title="Close" onPress={onClose} color={'#6D28D9'} />
         </View>
-      </View>
+      </ScrollView>
     </Modal>
   );
 }

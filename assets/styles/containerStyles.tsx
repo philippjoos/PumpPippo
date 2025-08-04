@@ -96,6 +96,7 @@ const containerStyles = StyleSheet.create({
     padding: 20,
     width: "100%",
     maxHeight: "90%",
+    justifyContent: "center",
   },
   lineContainer: {
     flexDirection: "row",
