@@ -43,10 +43,10 @@ export default function TabLayout() {
         <Tabs.Screen name="index" options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />),
+            <IoHomeSharp color={color} size={24} />
+          ),
           headerTitle: ({ tintColor }) => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Ionicons name="home-sharp" size={24} color={tintColor} style={{ marginRight: 8 }} />
               <IoHomeSharp size={24} color={tintColor} style={{ marginRight: 8 }} />
               <Text style={{ color: tintColor, fontSize: 18 }}>Home</Text>
             </View>
