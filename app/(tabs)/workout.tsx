@@ -141,36 +141,28 @@ export default function workout() {
   }
 
   return (
-    <View style={[containerStyles.container, { flex: 1 }]}>
-      <View style={containerStyles.container}>
-        {/* ScrollView of Exercises in workoutplan */}
-        <ScrollView style={[defaultStyles.scrollView, { flex: 2 }]}>
-          {exercises.length === 0 ? (
-            <Text style={textStyles.text}>currently no workoutplan selected!</Text>
-          ) : (
-            <>
+    <View style={[containerStyles.container]}>
+      {/* ScrollView of Exercises in workoutplan */}
+      <ScrollView style={[defaultStyles.scrollView, { flex: 1 }]}>
+        {exercises.length === 0 ? (
+          <Text style={textStyles.text}>currently no workoutplan selected!</Text>
+        ) : (
+          <>
             <Text style={textStyles.text}>{workoutPlan?.name ?? ''}</Text>
+            <View>
               {exercises.map((exercise) => (
-                <View key={exercise.name} style={containerStyles.exerciseContainer}>
+                <View style={containerStyles.exerciseContainer} >
                   <Text style={textStyles.exerciseName}>{exercise.name}</Text>
-                  {exercise.sets?.map((set, index) => (
-                    <View key={index} style={containerStyles.rowContainer}>
-                      <Text style={textStyles.content}>Set {set.setCount}:      </Text>
-                      <Text style={textStyles.content}>Reps: {set.reps},     </Text>
-                      <Text style={textStyles.content}>Weight: {set.weight},     </Text>
-                      <Text style={textStyles.content}>Rest Time: {set.rest_time} seconds</Text>
-                    </View>
-                  ))}
                 </View>
               ))}
-            </>
-          )}
+            </View>
+          </>
+        )}
+      </ScrollView>
 
-        </ScrollView>
-      </View>
-      <View style={[containerStyles.currentExerciseContainer, { flex: 1 }]}>
+      <View style={[containerStyles.currentExerciseContainer]}>
         {/* Container for current executed exercise */}
-        <Text style={textStyles.title}>current exercise</Text>
+        <Text style={textStyles.text}>current exercise {"\n"}{"\n"}</Text>
         {exercises.length > 0 && currentExercise && currentExercise.sets && (
           <>
             <View style={containerStyles.exerciseContainer}>
@@ -182,7 +174,7 @@ export default function workout() {
               <Text style={textStyles.content}>Weight: {currentExercise.sets[currentSetIndex].weight}</Text>
               <Text style={textStyles.content}>Rest: {currentExercise.sets[currentSetIndex].rest_time}s</Text>
               <View style={containerStyles.buttonContainer}>
-                <ButtonAddSetToCurrentExercise workoutplanName={workoutPlan?.name || ''} currentExerciseIndex={currentExerciseIndex}/>
+                <ButtonAddSetToCurrentExercise workoutplanName={workoutPlan?.name || ''} currentExerciseIndex={currentExerciseIndex} />
                 <ButtonEditCurrentSet
                   set={currentExercise.sets[currentSetIndex]}
                   currentExerciseIndex={currentExerciseIndex}
@@ -190,9 +182,10 @@ export default function workout() {
                 />
               </View>
             </View>
-            <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
           </>
         )}
+
+        <Text style={textStyles.text}>Timer: {timer > 0 ? `${timer}s` : 'Not running'}</Text>
 
         <View style={containerStyles.buttonNavigateExercise}>
           <View>

@@ -5,7 +5,7 @@ const containerStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    padding: 5,
+    padding: 3,
     backgroundColor: '#1F1F1F',
   },
   exerciseContainer: {
@@ -34,9 +34,16 @@ const containerStyles = StyleSheet.create({
   },
   currentExerciseContainer: {
     flexDirection: 'column',
-    flex: 1,
+    flex: 1.5,
     padding: 5,
     backgroundColor: '#1F1F1F',
+    borderWidth: 1,
+    borderColor: '#6D28D9',
+  },
+  workoutplanListContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    padding: 5,
     borderWidth: 1,
     borderColor: '#6D28D9',
   },
