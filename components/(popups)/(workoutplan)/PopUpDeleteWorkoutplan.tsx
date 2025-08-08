@@ -21,8 +21,12 @@ export default function PopUpDeleteWorkoutplan({ visible, onClose, onConfirm, ti
           <Text style={textStyles.title}>{title}</Text>
           <Text style={textStyles.content}>{content}</Text>
           <View style={containerStyles.buttonContainer}>
-            <Button title="Confirm" onPress={onConfirm} color={'#6D28D9'}/>
-            <Button title="Close" onPress={onClose} color={'#6D28D9'}/>
+            <View style={containerStyles.buttonHandleContainer}>
+              <Button title="Confirm" onPress={onConfirm} color={'#6D28D9'} />
+            </View>
+            <View style={containerStyles.buttonHandleContainer}>
+              <Button title="Close" onPress={onClose} color={'#6D28D9'} />
+            </View>
           </View>
         </View>
       </View>

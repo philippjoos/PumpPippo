@@ -23,7 +23,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   const [selectExerciseVisible, setSelectExerciseVisible] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const [sets, setSets] = useState<{ [exerciseIndex: number]: Set[] }>({});
-  
+
   const handleExerciseSelected = (exercise: Exercise) => {
     setSelectedExercises([...selectedExercises, exercise]);
     setSelectExerciseVisible(false);
@@ -43,7 +43,7 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
   };
 
   const handleCreate = () => {
-    if(workoutplanName === "") {
+    if (workoutplanName === "") {
       alert("Please enter a name for the workout plan!");
       return;
     }
@@ -104,50 +104,56 @@ export default function PopUpCreateWorkoutplan({ visible, onClose, onConfirm, ti
             </View>
           </View>
           <ScrollView>
-          {selectedExercises.map((exercise, exerciseIndex) => (
-  <View key={exerciseIndex}>
-    <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
-    {(sets[exerciseIndex] || []).map((set, setIndex) => (
-      <View key={setIndex} style={containerStyles.gridContainer}>
-        <Text style={textStyles.textBoxLabel}>Set: {set.setCount}</Text>
-        <View style={containerStyles.rowContainer}>
-          <Text style={textStyles.textBoxLabel}>Reps: </Text>
-          <TextInput
-            style={defaultStyles.textbox}
-            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'reps')}
-            value={set.reps.toString()}
-          />
-        </View>
-        <View style={containerStyles.rowContainer}>
-          <Text style={textStyles.textBoxLabel}>Weight: </Text>
-          <TextInput
-            style={defaultStyles.textbox}
-            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'weight')}
-            value={set.weight.toString()}
-          />
-        </View>
-        <View style={containerStyles.rowContainer}>
-          <Text style={textStyles.textBoxLabel}>Rest-Time: </Text>
-          <TextInput
-            style={defaultStyles.textbox}
-            onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'rest_time')}
-            value={(set.rest_time ?? 0).toString()}
-          />
-        </View>
-      </View>
-    ))}
-    <View style={containerStyles.gridContainer}>
-      <View style={{alignItems: "center"}}>
-        <Button title="Add Set" onPress={() => onAddSet(exerciseIndex)} color={'#6D28D9'} />
-      </View>
-    </View>
-  </View>
-))}
+            {selectedExercises.map((exercise, exerciseIndex) => (
+              <View key={exerciseIndex}>
+                <Text style={textStyles.ExerciseTitle}>{exercise.name}</Text>
+                {(sets[exerciseIndex] || []).map((set, setIndex) => (
+                  <View key={setIndex} style={containerStyles.gridContainer}>
+                    <Text style={textStyles.textBoxLabel}>Set: {set.setCount}</Text>
+                    <View style={containerStyles.rowContainer}>
+                      <Text style={textStyles.textBoxLabel}>Reps: </Text>
+                      <TextInput
+                        style={defaultStyles.textbox}
+                        onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'reps')}
+                        value={set.reps.toString()}
+                      />
+                    </View>
+                    <View style={containerStyles.rowContainer}>
+                      <Text style={textStyles.textBoxLabel}>Weight: </Text>
+                      <TextInput
+                        style={defaultStyles.textbox}
+                        onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'weight')}
+                        value={set.weight.toString()}
+                      />
+                    </View>
+                    <View style={containerStyles.rowContainer}>
+                      <Text style={textStyles.textBoxLabel}>Rest-Time: </Text>
+                      <TextInput
+                        style={defaultStyles.textbox}
+                        onChangeText={(text) => onModifySet(text, exerciseIndex, setIndex, 'rest_time')}
+                        value={(set.rest_time ?? 0).toString()}
+                      />
+                    </View>
+                  </View>
+                ))}
+                <View style={containerStyles.gridContainer}>
+                  <View style={{ alignItems: "center" }}>
+                    <Button title="Add Set" onPress={() => onAddSet(exerciseIndex)} color={'#6D28D9'} />
+                  </View>
+                </View>
+              </View>
+            ))}
           </ScrollView>
           <View style={containerStyles.buttonContainer}>
-            <Button title="Create" onPress={handleCreate} color={'#6D28D9'} />
-            <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} color={'#6D28D9'} />
-            <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+            <View style={containerStyles.buttonHandleContainer}>
+              <Button title="Create" onPress={handleCreate} color={'#6D28D9'} />
+            </View>
+            <View style={containerStyles.buttonHandleContainer}>
+              <Button title="Add Exercise" onPress={() => setSelectExerciseVisible(true)} color={'#6D28D9'} />
+            </View>
+            <View style={containerStyles.buttonHandleContainer}>
+              <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+            </View>
           </View>
         </View>
       </View>

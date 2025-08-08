@@ -162,7 +162,7 @@ export default function workout() {
 
       <View style={[containerStyles.currentExerciseContainer]}>
         {/* Container for current executed exercise */}
-        <Text style={textStyles.text}>current exercise {"\n"}{"\n"}</Text>
+        <Text style={textStyles.text}>current exercise {"\n"}</Text>
         {exercises.length > 0 && currentExercise && currentExercise.sets && (
           <>
             <View style={containerStyles.exerciseContainer}>
@@ -179,6 +179,9 @@ export default function workout() {
                   set={currentExercise.sets[currentSetIndex]}
                   currentExerciseIndex={currentExerciseIndex}
                   workoutplanName={workoutPlan?.name || ''}
+                  reps={currentExercise.sets[currentSetIndex].reps}
+                  weight={currentExercise.sets[currentSetIndex].weight}
+                  restTime={currentExercise.sets[currentSetIndex].rest_time ?? 0}
                 />
               </View>
             </View>

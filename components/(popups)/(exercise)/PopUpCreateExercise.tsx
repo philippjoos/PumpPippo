@@ -66,8 +66,12 @@ export default function PopUpCreateExercises({ visible, onClose, onConfirm, titl
                         </View>
                     </View>
                     <View style={containerStyles.buttonContainer}>
-                        <Button title="Create" onPress={addExercise} color={'#6D28D9'} />
-                        <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Create" onPress={addExercise} color={'#6D28D9'} />
+                        </View>
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+                        </View>
                     </View>
                 </View>
             </View>

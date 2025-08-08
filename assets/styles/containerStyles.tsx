@@ -34,7 +34,7 @@ const containerStyles = StyleSheet.create({
   },
   currentExerciseContainer: {
     flexDirection: 'column',
-    flex: 1.5,
+    flex: 2,
     padding: 5,
     backgroundColor: '#1F1F1F',
     borderWidth: 1,
@@ -49,8 +49,9 @@ const containerStyles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: 10,
+    alignItems: 'center',
   },
   buttonSelectExerciseToAddContainer: {
     marginBottom: 10,
@@ -87,7 +88,9 @@ const containerStyles = StyleSheet.create({
     position: "absolute",
     bottom: 5,
     alignSelf: 'center',
-    
+  },
+  buttonHandleContainer: {
+    marginHorizontal: 10,
   },
   // Styles from buttonCreateWorkoutplan.tsx
   createButtonContainer: {

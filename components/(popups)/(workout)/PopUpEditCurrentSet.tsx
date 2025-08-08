@@ -16,13 +16,22 @@ interface PopupModalProps {
     currentSet: Set;
     workoutplanName: string; // Hinzufügen
     currentExerciseIndex: number; // Hinzufügen
+    currentreps: number;
+    currentweight: number;
+    currentrestTime: number;
 }
 
-export default function PopUpEditCurrentSet({ visible, onClose, title, currentSet, workoutplanName, currentExerciseIndex }: PopupModalProps) {
+export default function PopUpEditCurrentSet({ visible, onClose, title, currentSet, workoutplanName, currentExerciseIndex, currentreps, currentweight, currentrestTime }: PopupModalProps) {
     const [weight, setWeight] = useState<string>('');
     const [reps, setReps] = useState<string>('');
     const [rest_time, setRestTime] = useState<string>('');
     
+    useEffect(() => {
+        setWeight(currentweight.toString());
+        setReps(currentreps.toString());
+        setRestTime(currentrestTime.toString());
+    }, [currentweight, currentreps, currentrestTime]);
+
     const editSet = async () => {
         const workoutPlans = await FileHandler.getWorkoutplans();
         if (workoutPlans) {
@@ -51,23 +60,27 @@ export default function PopUpEditCurrentSet({ visible, onClose, title, currentSe
                     <View style={containerStyles.gridContainer}>
                         <View style={containerStyles.rowContainer}>
                             <Text style={textStyles.content}>Reps: </Text>
-                            <TextInput style={defaultStyles.textbox} value={reps} onChangeText={setReps} />
+                            <TextInput style={defaultStyles.textbox} value={reps} onChangeText={(text) => setReps(text)} />
                         </View>
                     </View>
                     <View style={containerStyles.gridContainer}>
                         <View style={containerStyles.rowContainer}>
                             <Text style={textStyles.content}>Weight: </Text>
-                            <TextInput style={defaultStyles.textbox} value={weight} onChangeText={setWeight} />
+                            <TextInput style={defaultStyles.textbox} value={weight} onChangeText={(text) => setWeight(text)} />
                             </View>
                         <View style={containerStyles.rowContainer}>
                             <Text style={textStyles.content}>Rest Time: </Text>
-                            <TextInput style={defaultStyles.textbox} value={rest_time} onChangeText={setRestTime} />
+                            <TextInput style={defaultStyles.textbox} value={rest_time} onChangeText={(text) => setRestTime(text)} />
 
                         </View>
                     </View>
                     <View style={containerStyles.buttonContainer}>
-                        <Button title="Safe" onPress={editSet} color={'#6D28D9'} />
-                        <Button title="Close" onPress={onClose} color={'#6D28D9'} />
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Safe" onPress={editSet} color={'#6D28D9'} />
+                        </View>
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Close" onPress={onClose} color={'#6D28D9'} />
+                        </View>
                     </View>
                 </View>
             </View>

@@ -12,9 +12,12 @@ interface Props {
     set: Set;
     currentExerciseIndex: number;
     workoutplanName: string;
+    reps: number;
+    weight: number;
+    restTime: number;
   }
   
-  export default function ButtonEditCurrentSet({ set, currentExerciseIndex, workoutplanName }: Props) {
+  export default function ButtonEditCurrentSet({ set, currentExerciseIndex, workoutplanName, reps, weight, restTime }: Props) {
     const [modalVisible, setModalVisible] = useState(false);
   
 
@@ -23,7 +26,7 @@ interface Props {
             <Pressable style={buttonStyles.buttonModify} onPress={() => setModalVisible(true)}>
                 <IoCreateOutline size={24} color="white" />
             </Pressable>
-            <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} title={"Edit Set"} currentSet={set} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex}/>
+            <PopUpEditCurrentSet visible={modalVisible} onClose={() => setModalVisible(false)} title={"Edit Set"} currentSet={set} workoutplanName={workoutplanName} currentExerciseIndex={currentExerciseIndex} currentreps={reps} currentweight={weight} currentrestTime={restTime}/>
         </View>
     );
 }

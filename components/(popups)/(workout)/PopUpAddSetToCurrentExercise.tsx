@@ -47,7 +47,7 @@ export default function PopUpAddSetToCurrentExercise({ visible, workoutplanName,
         }
         // Save the updated workout plans
         await FileHandler.saveData('workoutplans', workoutPlans);
-        
+
         onClosing();
     };
 
@@ -87,8 +87,12 @@ export default function PopUpAddSetToCurrentExercise({ visible, workoutplanName,
                         </View>
                     </ScrollView>
                     <View style={containerStyles.buttonContainer}>
-                        <Button title="Add" onPress={addSet} color={'#6D28D9'} />
-                        <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Add" onPress={addSet} color={'#6D28D9'} />
+                        </View>
+                        <View style={containerStyles.buttonHandleContainer}>
+                            <Button title="Close" onPress={onClosing} color={'#6D28D9'} />
+                        </View>
                     </View>
                 </View>
             </View>
